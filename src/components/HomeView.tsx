@@ -222,14 +222,17 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {/* 3. Upcoming Event Card Section */}
       <section className="py-6 max-w-[1280px] mx-auto px-6 md:px-12">
         <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-[#dbc2b0]/30 flex flex-col md:flex-row">
-          <div className="md:w-1/2 relative h-64 md:h-auto">
-            <img
-              alt="सजा हुआ घाट"
-              className="w-full h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXslVGB0mhG38f21dq6SVo6Z5ueCCa_KrMaB5ZcItmr6Nyie5kIih1ShjRXMw-PVLmJgEQPlgykSfFRl-aZMd7uIB6Z37jsMjcz1Q-2Q1rom76m26iHep645MdlothVsG3FRaTBcIDf2kyGVv6jjDO8jB2cg3UagFP0RgW619vea4RJuWnmpoBRXuPT-6_DFR_AG04pPWEUiPV3q-foIgOS5VGRTTgJ-rsIaa_wLGdTb002-reo2raRS7uebpazmcy3gh66oyUupI=s1600"
-            />
-            <div className="absolute top-5 left-5 bg-[#b6171e] text-white px-4 py-1.5 rounded-lg text-xs font-semibold shadow-lg">
-              आगामी: नवंबर 2026
+          <div className="md:w-1/2 relative min-h-[280px] md:min-h-[380px]">
+            <iframe
+              className="w-full h-full min-h-[280px] md:min-h-[380px] rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none border-0"
+              src="https://www.youtube.com/embed/DG8F-csoRAQ?autoplay=1&mute=1&loop=1&playlist=DG8F-csoRAQ&controls=1&modestbranding=1&rel=0"
+              title="सोम बाज़ार छठ पूजा वीडियो झलक"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+            <div className="absolute top-4 left-4 bg-[#b6171e]/90 text-white px-3.5 py-1.5 rounded-xl text-xs font-semibold shadow-lg z-10 flex items-center gap-1.5 backdrop-blur-md border border-white/20">
+              <span className="material-symbols-outlined text-sm animate-pulse text-amber-200">play_circle</span>
+              <span>पावन वीडियो झलक</span>
             </div>
           </div>
 
