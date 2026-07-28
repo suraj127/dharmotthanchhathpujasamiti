@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { OFFICIAL_LOGO_URL } from '../constants';
+import { LiveGhatEffects } from './LiveGhatEffects';
 
 interface HomeViewProps {
   setCurrentTab: (tab: string) => void;
@@ -24,10 +25,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
         <div className="absolute inset-0 z-0">
           <img
             alt="छठ पूजा सूर्योदय का दृश्य"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-all duration-700"
+            style={{ filter: 'url(#water-wave-filter)' }}
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwsWpWMLFJeL5aW_wc7yfEwwP2sL82WdKguD2snWKTNeTc6cqelGvsl9dl-W1IAJ-tJoBqQ9gQx-9vridp06ScSuuwksBwLvYXLjNf23PtQWZ3nJxo0xOkUEBKeG26bJZVGZoVe_gSITrmZjEg7cNCpX3pEkHYEoanicwYjdm6ko9TgWw5YQrLNYyoeiiklO6zwmSn-AIL32z8MXEFLuHbC9DsQYU7zKXmaWahGOnO9tbjh7JqO7kVvV3AC2X8LbkuSdiq5thlI1w=s1600"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#2e1500]/80 via-[#2e1500]/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2e1500]/80 via-[#2e1500]/40 to-transparent pointer-events-none"></div>
+
+          {/* Interactive Live Ghat Animation Effects Layer (Moving Water Ripples, Incense Stick Smoke, Floating Diyas, Sunbeams) */}
+          <LiveGhatEffects showControls={true} />
         </div>
 
         <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-16 py-16 flex flex-col md:flex-row items-center justify-between gap-10">
@@ -222,13 +227,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {/* 3. Upcoming Event Card Section */}
       <section className="py-6 max-w-[1280px] mx-auto px-6 md:px-12">
         <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-[#dbc2b0]/30 flex flex-col md:flex-row">
-          <div className="md:w-1/2 relative h-64 md:h-auto">
+          <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
             <img
               alt="सजा हुआ घाट"
               className="w-full h-full object-cover"
+              style={{ filter: 'url(#water-wave-filter)' }}
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXslVGB0mhG38f21dq6SVo6Z5ueCCa_KrMaB5ZcItmr6Nyie5kIih1ShjRXMw-PVLmJgEQPlgykSfFRl-aZMd7uIB6Z37jsMjcz1Q-2Q1rom76m26iHep645MdlothVsG3FRaTBcIDf2kyGVv6jjDO8jB2cg3UagFP0RgW619vea4RJuWnmpoBRXuPT-6_DFR_AG04pPWEUiPV3q-foIgOS5VGRTTgJ-rsIaa_wLGdTb002-reo2raRS7uebpazmcy3gh66oyUupI=s1600"
             />
-            <div className="absolute top-5 left-5 bg-[#b6171e] text-white px-4 py-1.5 rounded-lg text-xs font-semibold shadow-lg">
+            <LiveGhatEffects showControls={false} />
+            <div className="absolute top-5 left-5 z-20 bg-[#b6171e] text-white px-4 py-1.5 rounded-lg text-xs font-semibold shadow-lg">
               आगामी: नवंबर 2026
             </div>
           </div>
