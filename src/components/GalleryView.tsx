@@ -200,28 +200,22 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
 
         <div className="relative z-10 px-6 max-w-3xl space-y-4 py-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#ff9933]/30 backdrop-blur-md text-amber-100 border border-[#ff9933]/50 rounded-full text-xs font-semibold">
-            <span className="material-symbols-outlined text-sm text-amber-300">photo_library</span>
-            <span>धर्मोत्थान चित्र दीर्घा</span>
+            <span className="material-symbols-outlined text-sm text-amber-300">collections</span>
+            <span>पवित्र चित्र संग्रह</span>
           </div>
 
           <h1 className="font-serif text-4xl md:text-6xl font-bold text-white drop-shadow-md leading-tight">
-            आधिकारिक समिति संग्रह <br />
-            <span className="text-[#ffd700] text-3xl md:text-5xl">(Samiti Collection)</span>
+            छठ पूजा चित्र दीर्घा
           </h1>
 
           <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क में छठ पूजा महापर्व के पावन क्षणों, संध्या व प्रातःकालीन अर्घ्य और सामुदायिक एकता का सुंदर क्षैतिज चित्र संग्रह।
+            ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क में छठ पूजा महापर्व के पावन क्षणों, संध्या व प्रातःकालीन अर्घ्य और सामुदायिक एकता की स्मृतियां।
           </p>
 
           <div className="flex items-center justify-center gap-6 pt-2">
             <div className="flex items-center gap-2 text-amber-200 text-xs font-semibold">
               <span className="material-symbols-outlined text-base">collections</span>
               <span>16+ एचडी चित्र</span>
-            </div>
-            <div className="h-4 w-[1px] bg-white/30"></div>
-            <div className="flex items-center gap-2 text-amber-200 text-xs font-semibold">
-              <span className="material-symbols-outlined text-base">verified</span>
-              <span>आधिकारिक रिकॉर्ड</span>
             </div>
           </div>
         </div>
@@ -307,7 +301,7 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-[#ff9933] animate-ping"></span>
             <h2 className="font-serif text-xl md:text-2xl font-bold text-[#8f4e00]">
-              मुख्य आकर्षण (Horizontal Showcase)
+              मुख्य आकर्षण
             </h2>
           </div>
 
@@ -390,9 +384,9 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
         <section className="max-w-[1280px] mx-auto px-6 md:px-12 space-y-6">
           <div className="border-b border-[#dbc2b0]/30 pb-3 flex items-center justify-between">
             <h3 className="font-serif text-2xl font-bold text-[#1a1c1e]">
-              समिति संग्रह चित्र सूची ({filteredItems.length})
+              चित्र संग्रह ({filteredItems.length})
             </h3>
-            <span className="text-xs text-[#887364] font-medium">क्षैतिज कार्ड दृश्य (Horizontal View)</span>
+            <span className="text-xs text-[#887364] font-medium">स्मृति दीर्घा</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -464,7 +458,7 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
               <div>
                 <span className="text-amber-300 text-xs uppercase tracking-widest font-bold">स्लाइडर रील व्यू</span>
                 <h3 className="font-serif text-2xl md:text-3xl font-bold text-amber-100 mt-1">
-                  सभी 16 चित्र क्षैतिज पंक्ति में
+                  चित्र संग्रह
                 </h3>
               </div>
               <span className="text-xs bg-amber-400 text-black font-bold px-3 py-1 rounded-full">
