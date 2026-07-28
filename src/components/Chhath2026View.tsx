@@ -176,12 +176,12 @@ export const Chhath2026View: React.FC<Chhath2026ViewProps> = ({
                 सामुदायिक भक्ति
               </h2>
               <p className="text-[#554336] text-sm md:text-base leading-relaxed max-w-xl">
-                हमारी समिति प्रतिवर्ष 50,000 से अधिक श्रद्धालुओं की मेजबानी करती है। हम निःशुल्क बांस की टोकरी (दउरा), छठ गीतों के लिए सांस्कृतिक मंच और हर व्रती की सहायता के लिए 500 स्वयंसेवकों की टीम प्रदान करते हैं।
+                हमारी समिति प्रतिवर्ष 500+ से अधिक श्रद्धालुओं की मेजबानी करती है। हम निःशुल्क बांस की टोकरी (दउरा), छठ गीतों के लिए सांस्कृतिक मंच और हर व्रती की सहायता के लिए 50+ स्वयंसेवकों की टीम प्रदान करते हैं।
               </p>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
                 <div className="text-center p-3 bg-white/70 rounded-2xl border border-white">
-                  <div className="font-serif text-2xl font-bold text-[#8f4e00]">500+</div>
+                  <div className="font-serif text-2xl font-bold text-[#8f4e00]">50+</div>
                   <div className="text-[11px] text-[#554336] font-semibold uppercase">स्वयंसेवक</div>
                 </div>
                 <div className="text-center p-3 bg-white/70 rounded-2xl border border-white">
