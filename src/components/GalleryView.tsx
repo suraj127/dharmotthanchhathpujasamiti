@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 interface GalleryViewProps {
   onOpenPhotoUploadModal?: () => void;
@@ -22,11 +22,8 @@ interface GalleryItem {
 }
 
 export const GalleryView: React.FC<GalleryViewProps> = () => {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState<'all' | 'puja' | 'ghat' | 'community'>('all');
-  const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
-
-  const thumbnailRibbonRef = useRef<HTMLDivElement>(null);
 
   const galleryItems: GalleryItem[] = [
     {
@@ -163,32 +160,22 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
     ? galleryItems
     : galleryItems.filter((item) => item.category === activeCategory);
 
-  // Safely clamp slide index if category changes
-  const activeSlideIndex = Math.min(currentSlideIndex, filteredItems.length - 1);
-  const activeItem = filteredItems[activeSlideIndex] || filteredItems[0];
-
-  const handlePrevSlide = () => {
-    setCurrentSlideIndex((prev) => (prev > 0 ? prev - 1 : filteredItems.length - 1));
+  const handlePrevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedIndex === null) return;
+    setSelectedIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : filteredItems.length - 1));
   };
 
-  const handleNextSlide = () => {
-    setCurrentSlideIndex((prev) => (prev < filteredItems.length - 1 ? prev + 1 : 0));
-  };
-
-  const handleThumbnailClick = (idx: number) => {
-    setCurrentSlideIndex(idx);
-    if (thumbnailRibbonRef.current) {
-      const activeThumb = thumbnailRibbonRef.current.children[idx] as HTMLElement;
-      if (activeThumb) {
-        activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-      }
-    }
+  const handleNextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedIndex === null) return;
+    setSelectedIndex((prev) => (prev !== null && prev < filteredItems.length - 1 ? prev + 1 : 0));
   };
 
   return (
     <div className="space-y-12 animate-in fade-in duration-300">
       {/* 1. Hero Header */}
-      <section className="relative min-h-[380px] flex items-center justify-center overflow-hidden rounded-3xl md:rounded-[40px] shadow-2xl mx-3 md:mx-10 mt-3 border border-[#dbc2b0]/30 text-center">
+      <section className="relative min-h-[360px] flex items-center justify-center overflow-hidden rounded-3xl md:rounded-[40px] shadow-2xl mx-3 md:mx-10 mt-3 border border-[#dbc2b0]/30 text-center">
         <div className="absolute inset-0 z-0">
           <img
             alt="गैलरी"
@@ -215,12 +202,12 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
         </div>
       </section>
 
-      {/* 2. Category Filter Pills */}
+      {/* 2. Category Filter Pills Bar */}
       <section className="max-w-[1280px] mx-auto px-6 md:px-12">
-        <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#dbc2b0]/30 flex flex-wrap items-center justify-between gap-4">
+        <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#dbc2b0]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-2">
             <button
-              onClick={() => { setActiveCategory('all'); setCurrentSlideIndex(0); }}
+              onClick={() => setActiveCategory('all')}
               className={`px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all cursor-pointer ${
                 activeCategory === 'all'
                   ? 'saffron-gradient text-white shadow-md'
@@ -230,7 +217,7 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
               सभी चित्र ({galleryItems.length})
             </button>
             <button
-              onClick={() => { setActiveCategory('puja'); setCurrentSlideIndex(0); }}
+              onClick={() => setActiveCategory('puja')}
               className={`px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeCategory === 'puja'
                   ? 'saffron-gradient text-white shadow-md'
@@ -241,7 +228,7 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
               <span>अर्घ्य व पूजा</span>
             </button>
             <button
-              onClick={() => { setActiveCategory('ghat'); setCurrentSlideIndex(0); }}
+              onClick={() => setActiveCategory('ghat')}
               className={`px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeCategory === 'ghat'
                   ? 'saffron-gradient text-white shadow-md'
@@ -252,7 +239,7 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
               <span>घाट व्यवस्था</span>
             </button>
             <button
-              onClick={() => { setActiveCategory('community'); setCurrentSlideIndex(0); }}
+              onClick={() => setActiveCategory('community')}
               className={`px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeCategory === 'community'
                   ? 'saffron-gradient text-white shadow-md'
@@ -265,152 +252,76 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
           </div>
 
           <div className="text-xs text-[#887364] font-semibold flex items-center gap-1">
-            <span className="material-symbols-outlined text-sm text-[#ff9933]">swipe</span>
-            <span>स्लाइडर प्रस्तुति ({activeSlideIndex + 1} / {filteredItems.length})</span>
+            <span className="material-symbols-outlined text-sm text-[#ff9933]">photo_library</span>
+            <span>कुल चित्र: {filteredItems.length}</span>
           </div>
         </div>
       </section>
 
-      {/* 3. MAIN PURE SLIDER / CAROUSEL DECK (JUST SLIDE) */}
+      {/* 3. ALL PHOTOS AT ONCE UNIFORM GRID */}
       <section className="max-w-[1280px] mx-auto px-6 md:px-12 space-y-6">
-        <div className="relative bg-white rounded-3xl md:rounded-[36px] overflow-hidden border border-[#dbc2b0]/35 shadow-2xl flex flex-col lg:flex-row min-h-[480px] md:min-h-[540px]">
-          
-          {/* Main Slide Photo Frame (Left 65% on Desktop) */}
-          <div
-            onClick={() => setIsLightboxOpen(true)}
-            className="lg:w-2/3 relative h-72 sm:h-96 lg:h-auto overflow-hidden bg-black cursor-pointer group"
-          >
-            <img
-              key={activeItem.id}
-              src={activeItem.url}
-              alt={activeItem.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 animate-in fade-in"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-
-            {/* Left Arrow Navigation Button */}
-            <button
-              onClick={(e) => { e.stopPropagation(); handlePrevSlide(); }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/60 border border-white/30 text-white flex items-center justify-center shadow-2xl hover:bg-[#ff9933] hover:border-[#ff9933] transition-all cursor-pointer hover:scale-110 active:scale-95"
-              title="पिछला स्लाइड (Previous Slide)"
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredItems.map((item, idx) => (
+            <div
+              key={item.id}
+              onClick={() => setSelectedIndex(idx)}
+              className="group bg-white rounded-3xl overflow-hidden shadow-md border border-[#dbc2b0]/30 hover:shadow-2xl hover:border-[#8f4e00]/50 transition-all duration-300 cursor-pointer flex flex-col justify-between"
             >
-              <span className="material-symbols-outlined text-2xl">chevron_left</span>
-            </button>
-
-            {/* Right Arrow Navigation Button */}
-            <button
-              onClick={(e) => { e.stopPropagation(); handleNextSlide(); }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/60 border border-white/30 text-white flex items-center justify-center shadow-2xl hover:bg-[#ff9933] hover:border-[#ff9933] transition-all cursor-pointer hover:scale-110 active:scale-95"
-              title="अगला स्लाइड (Next Slide)"
-            >
-              <span className="material-symbols-outlined text-2xl">chevron_right</span>
-            </button>
-
-            {/* Category Tag & Slide Counter Badge */}
-            <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
-              <span className="px-3.5 py-1 bg-black/60 backdrop-blur-md border border-amber-300/40 text-amber-200 text-xs font-bold rounded-full shadow-lg">
-                {activeItem.categoryLabel}
-              </span>
-              <span className="px-3 py-1 bg-[#b6171e] text-white text-xs font-extrabold rounded-full shadow-lg">
-                #{String(activeSlideIndex + 1).padStart(2, '0')} / {String(filteredItems.length).padStart(2, '0')}
-              </span>
-            </div>
-
-            {/* Fullscreen Zoom Hint */}
-            <div className="absolute bottom-4 left-4 z-10 opacity-80 group-hover:opacity-100 transition-opacity">
-              <span className="px-3 py-1 bg-black/60 backdrop-blur-md text-white text-xs font-semibold rounded-full flex items-center gap-1.5 border border-white/20">
-                <span className="material-symbols-outlined text-sm">zoom_in</span>
-                <span>पूर्ण चित्र देखें</span>
-              </span>
-            </div>
-          </div>
-
-          {/* Active Slide Info Content Panel (Right 35% on Desktop) */}
-          <div className="lg:w-1/3 p-6 md:p-8 bg-gradient-to-br from-[#2e1500] via-[#241000] to-[#170900] text-white flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between text-xs text-amber-300/80 font-bold border-b border-amber-500/20 pb-3">
-                <span>स्लाइड {activeSlideIndex + 1}</span>
-                <span>सोम बाज़ार, नन्हे पार्क घाट</span>
-              </div>
-
-              <h2 className="font-serif text-2xl md:text-3xl font-bold text-amber-100 leading-snug">
-                {activeItem.title}
-              </h2>
-
-              <div className="h-[2px] w-16 bg-[#ff9933] rounded-full"></div>
-
-              <p className="text-amber-100/85 text-xs md:text-sm leading-relaxed">
-                {activeItem.subtitle}
-              </p>
-            </div>
-
-            {/* Slide Navigation Buttons */}
-            <div className="pt-6 border-t border-amber-500/20 space-y-4">
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={handlePrevSlide}
-                  className="flex-1 py-3 bg-white/10 hover:bg-white/20 border border-amber-300/20 rounded-xl text-xs font-bold text-amber-100 flex items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95"
-                >
-                  <span className="material-symbols-outlined text-base">arrow_back</span>
-                  <span>पिछला</span>
-                </button>
-                <button
-                  onClick={handleNextSlide}
-                  className="flex-1 py-3 saffron-gradient text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-lg hover:scale-102 transition-all cursor-pointer active:scale-95"
-                >
-                  <span>अगला</span>
-                  <span className="material-symbols-outlined text-base">arrow_forward</span>
-                </button>
-              </div>
-
-              <button
-                onClick={() => setIsLightboxOpen(true)}
-                className="w-full py-2.5 bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-300 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer"
-              >
-                <span className="material-symbols-outlined text-sm">fullscreen</span>
-                <span>फुल स्क्रीन में देखें</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Horizontal Slider Thumbnail Ribbon */}
-        <div className="space-y-2 pt-2">
-          <div className="flex items-center justify-between text-xs font-semibold text-[#8f4e00]">
-            <span>थंबनेल रील (Click to Jump Slide):</span>
-            <span>{filteredItems.length} चित्र उपलब्ध</span>
-          </div>
-
-          <div
-            ref={thumbnailRibbonRef}
-            className="flex gap-3 overflow-x-auto scrollbar-none py-2 px-1 snap-x snap-mandatory scroll-smooth"
-          >
-            {filteredItems.map((item, idx) => (
-              <button
-                key={item.id}
-                onClick={() => handleThumbnailClick(idx)}
-                className={`flex-shrink-0 relative w-24 h-16 sm:w-32 sm:h-20 rounded-2xl overflow-hidden border-2 transition-all duration-300 cursor-pointer snap-start ${
-                  idx === activeSlideIndex
-                    ? 'border-[#ff9933] ring-4 ring-[#ff9933]/30 scale-105 shadow-lg'
-                    : 'border-transparent opacity-60 hover:opacity-100 hover:scale-102'
-                }`}
-              >
-                <img src={item.url} alt={item.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                <div className="absolute top-1 left-1 bg-black/70 text-amber-200 text-[10px] font-bold px-1.5 py-0.5 rounded">
-                  #{idx + 1}
+              {/* Photo Frame Container (Uniform 16:10 aspect ratio) */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-black/5">
+                <img
+                  src={item.url}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                  <span className="text-white text-[11px] font-semibold flex items-center gap-1 bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">
+                    <span className="material-symbols-outlined text-xs">zoom_in</span>
+                    बड़ा देखें
+                  </span>
                 </div>
-              </button>
-            ))}
-          </div>
+
+                {/* Category Badge & Photo Number Tag */}
+                <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
+                  <span className="px-2.5 py-0.5 bg-black/50 backdrop-blur-md border border-amber-300/40 text-amber-200 text-[10px] font-bold rounded-full">
+                    {item.categoryLabel}
+                  </span>
+                  <span className="px-2 py-0.5 bg-[#b6171e] text-white text-[10px] font-extrabold rounded-md shadow-md">
+                    #{String(idx + 1).padStart(2, '0')}
+                  </span>
+                </div>
+              </div>
+
+              {/* Photo Info Content */}
+              <div className="p-5 flex-1 flex flex-col justify-between space-y-3 bg-gradient-to-b from-white to-[#fffcf7]">
+                <div className="space-y-1.5">
+                  <h3 className="font-serif font-bold text-base text-[#8f4e00] group-hover:text-[#b6171e] transition-colors leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-[#554336] text-xs leading-relaxed line-clamp-2">
+                    {item.subtitle}
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-[#dbc2b0]/20 flex items-center justify-between text-xs text-[#8f4e00] font-semibold">
+                  <span className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    <span>विस्तार से देखें</span>
+                    <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                  </span>
+                  <span className="text-[10px] text-[#887364]">सोम बाज़ार</span>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* 4. FULL-SCREEN LIGHTBOX MODAL */}
-      {isLightboxOpen && (
+      {selectedIndex !== null && filteredItems[selectedIndex] && (
         <div
-          onClick={() => setIsLightboxOpen(false)}
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setSelectedIndex(null)}
+          className="fixed inset-0 z-50 bg-black/92 backdrop-blur-lg flex items-center justify-center p-4 animate-in fade-in duration-200"
         >
           <div
             onClick={(e) => e.stopPropagation()}
@@ -418,7 +329,7 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
           >
             {/* Close Button */}
             <button
-              onClick={() => setIsLightboxOpen(false)}
+              onClick={() => setSelectedIndex(null)}
               className="absolute top-4 right-4 z-40 w-11 h-11 rounded-full bg-black/70 border border-white/20 text-white flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer"
               title="बंद करें (Close)"
             >
@@ -427,7 +338,7 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
 
             {/* Left Arrow Button */}
             <button
-              onClick={handlePrevSlide}
+              onClick={handlePrevImage}
               className="absolute left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full bg-black/70 border border-amber-300/30 text-amber-200 flex items-center justify-center hover:bg-amber-500 hover:text-black transition-all cursor-pointer shadow-2xl"
               title="पिछला फोटो (Previous)"
             >
@@ -436,43 +347,43 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
 
             {/* Right Arrow Button */}
             <button
-              onClick={handleNextSlide}
+              onClick={handleNextImage}
               className="absolute right-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full bg-black/70 border border-amber-300/30 text-amber-200 flex items-center justify-center hover:bg-amber-500 hover:text-black transition-all cursor-pointer shadow-2xl"
               title="अगली फोटो (Next)"
             >
               <span className="material-symbols-outlined text-2xl">chevron_right</span>
             </button>
 
-            {/* Photo Preview Container */}
+            {/* Photo Preview Area */}
             <div className="md:w-2/3 bg-black flex items-center justify-center p-4 min-h-[320px] md:min-h-[500px]">
               <img
-                src={activeItem.url}
-                alt={activeItem.title}
+                src={filteredItems[selectedIndex].url}
+                alt={filteredItems[selectedIndex].title}
                 className="max-w-full max-h-[75vh] object-contain rounded-xl drop-shadow-2xl"
                 referrerPolicy="no-referrer"
               />
             </div>
 
-            {/* Photo Info Side Panel */}
+            {/* Photo Details Sidebar */}
             <div className="md:w-1/3 p-6 md:p-8 space-y-6 flex flex-col justify-between border-t md:border-t-0 md:border-l border-amber-500/20 bg-gradient-to-b from-[#281303] to-[#120701] text-white">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="px-3 py-1 bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold rounded-full">
-                    {activeItem.categoryLabel}
+                    {filteredItems[selectedIndex].categoryLabel}
                   </span>
                   <span className="text-amber-200/70 text-xs font-bold">
-                    {activeSlideIndex + 1} / {filteredItems.length}
+                    {selectedIndex + 1} / {filteredItems.length}
                   </span>
                 </div>
 
                 <h3 className="font-serif text-xl md:text-2xl font-bold text-amber-100 leading-snug">
-                  {activeItem.title}
+                  {filteredItems[selectedIndex].title}
                 </h3>
 
                 <div className="h-[2px] w-12 bg-amber-400"></div>
 
                 <p className="text-amber-100/80 text-xs md:text-sm leading-relaxed">
-                  {activeItem.subtitle}
+                  {filteredItems[selectedIndex].subtitle}
                 </p>
               </div>
 
@@ -483,13 +394,13 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
                 </div>
                 <div className="flex gap-2">
                   <button
-                    onClick={handlePrevSlide}
+                    onClick={handlePrevImage}
                     className="flex-1 py-2.5 bg-white/10 hover:bg-white/20 rounded-xl text-xs text-amber-200 font-semibold transition-colors cursor-pointer"
                   >
                     ◄ पिछला
                   </button>
                   <button
-                    onClick={handleNextSlide}
+                    onClick={handleNextImage}
                     className="flex-1 py-2.5 bg-amber-500 text-black hover:bg-amber-400 rounded-xl text-xs font-bold transition-colors cursor-pointer"
                   >
                     अगला ►
