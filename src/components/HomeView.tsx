@@ -225,7 +225,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <div className="md:w-1/2 relative min-h-[280px] md:min-h-[380px]">
             <iframe
               className="w-full h-full min-h-[280px] md:min-h-[380px] rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none border-0"
-              src="https://www.youtube.com/embed/DG8F-csoRAQ?autoplay=1&mute=1&loop=1&playlist=DG8F-csoRAQ&controls=1&modestbranding=1&rel=0"
+              src="https://www.youtube.com/embed/OrlnX9zM5-k?autoplay=1&mute=1&loop=1&playlist=OrlnX9zM5-k&controls=1&modestbranding=1&rel=0"
               title="सोम बाज़ार छठ पूजा वीडियो झलक"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
