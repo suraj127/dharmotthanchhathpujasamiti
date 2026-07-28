@@ -21,20 +21,20 @@ export const AboutView: React.FC<AboutViewProps> = ({ onOpenDonateModal, onOpenC
       image: '/members/suraj-bhan-gupta.jpeg',
     },
     {
-      name: 'श्री सोनू कुमार (Sonu Kumar)',
-      role: 'सचिव (Secretary)',
+      name: 'श्री राज सिंह (Raj Singh)',
+      role: 'महासचिव (General Secretary)',
       desc: 'समिति के मुख्य संचालक जो सभी कार्यक्रमों, पत्राचार और संगठनात्मक गतिविधियों का प्रबंधन करते हैं।',
-      image: '/members/sonu-kumar.jpeg',
+      image: '/members/raj-singh.jpeg',
+    },
+    {
+      name: 'श्री मुरारी झा (Murari Jha)',
+      role: 'कोषाध्यक्ष (Treasurer)',
+      desc: 'वित्तीय पारदर्शिता और समिति के कोष का लेखा-जोखा रखने के जिम्मेदार अधिकारी।',
+      image: '/members/murari-jha.jpeg',
     },
   ];
 
   const executiveMembers = [
-    {
-      name: 'श्री राज सिंह (Raj Singh)',
-      role: 'कोषाध्यक्ष (Treasurer)',
-      desc: 'वित्तीय पारदर्शिता और समिति के कोष का लेखा-जोखा रखने के जिम्मेदार अधिकारी।',
-      image: '/members/raj-singh.jpeg',
-    },
     {
       name: 'श्री रजनीश राय (Rajnish Rai)',
       role: 'संरक्षक (Patron)',
@@ -46,6 +46,12 @@ export const AboutView: React.FC<AboutViewProps> = ({ onOpenDonateModal, onOpenC
       role: 'सलाहकार (Advisor)',
       desc: 'धार्मिक अनुष्ठानों, पावन छठ पूजा विधि-विधान और सांस्कृतिक कार्यक्रमों के मुख्य सलाहकार।',
       image: '/members/acharya-aditya-jha.jpeg',
+    },
+    {
+      name: 'श्री सोनू कुमार (Sonu Kumar)',
+      role: 'कार्यकारिणी सदस्य (Executive Member)',
+      desc: 'घाट व्यवस्था, महाप्रसाद वितरण और स्वयंसेवक प्रबंधन के सक्रिय प्रभारी सदस्य।',
+      image: '/members/sonu-kumar.jpeg',
     },
     {
       name: 'श्री रजनीश मिश्रा (Rajnish Mishra)',
