@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { OFFICIAL_LOGO_URL } from '../constants';
-import { LiveGhatEffects } from './LiveGhatEffects';
 
 interface Chhath2026ViewProps {
   onOpenVolunteerModal: () => void;
@@ -45,11 +44,9 @@ export const Chhath2026View: React.FC<Chhath2026ViewProps> = ({
           <img
             alt="छठ पूजा 2026"
             className="w-full h-full object-cover"
-            style={{ filter: 'url(#water-wave-filter)' }}
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz9rIKuwUBUUPeQKVauefu4Od5eM6Uu9fZeiwWU15S3mDZ4oBzhiU8wBctAk5Dyls3vDFynRvi6A0EoblGCYQCnEoB_5TIxU21FPEZeU7au71stehknpj_ReEbpc7HJoBJLACtt6aOIkWITvpqGYiEHHXNGO70vLd0Qh23hBse4aUYZXCnIVcxo41j6lT8vjb-bvvBPVJ4886mazBg4V3eMKSdhPbyD009MuBzTmQwIctEXMeFixIk0e_36ktwTG9Pn2tJF58ekHo=s1600"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-[#f9f9fc] pointer-events-none"></div>
-          <LiveGhatEffects showControls={false} />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-[#f9f9fc]"></div>
         </div>
 
         <div className="relative z-10 px-6 max-w-3xl space-y-6">
