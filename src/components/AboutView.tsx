@@ -207,26 +207,30 @@ export const AboutView: React.FC<AboutViewProps> = ({ onOpenDonateModal, onOpenC
               </div>
             </div>
 
-            <div className="lg:w-2/3 space-y-8">
+            <div className="lg:w-2/3 space-y-10">
               {/* Core Leaders */}
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <h3 className="text-xs font-bold uppercase tracking-widest text-[#887364] border-b border-[#dbc2b0]/30 pb-2">
                   मुख्य नेतृत्व (Core Leadership)
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {coreLeaders.map((m, idx) => (
-                    <div key={idx} className="group p-5 bg-white rounded-2xl shadow-sm border border-[#dbc2b0]/25 hover:shadow-md hover:border-[#8f4e00]/40 transition-all duration-300 flex flex-col sm:flex-row gap-4 items-center sm:items-start">
-                      <img
-                        src={m.image}
-                        alt={m.name}
-                        className="w-20 h-20 rounded-2xl object-cover border-2 border-[#ff9933]/30 shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform"
-                      />
-                      <div className="space-y-2 text-center sm:text-left flex-1">
-                        <div className="flex flex-wrap items-center justify-between gap-1.5">
-                          <h5 className="font-serif font-bold text-base text-[#8f4e00] group-hover:text-[#b6171e] transition-colors duration-200">{m.name}</h5>
-                          <span className="text-[11px] font-semibold text-[#b6171e] px-2.5 py-0.5 rounded-full bg-[#ffdad6]">{m.role}</span>
+                    <div key={idx} className="group bg-white rounded-3xl overflow-hidden shadow-md border border-[#dbc2b0]/30 hover:shadow-xl hover:border-[#8f4e00]/50 transition-all duration-300 flex flex-col">
+                      <div className="relative h-60 sm:h-64 overflow-hidden bg-slate-100">
+                        <img
+                          src={m.image}
+                          alt={m.name}
+                          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute top-3 right-3 bg-[#b6171e] text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md backdrop-blur-sm">
+                          {m.role}
                         </div>
-                        <p className="text-xs text-[#554336] leading-relaxed pt-1.5 border-t border-[#dbc2b0]/20">{m.desc}</p>
+                      </div>
+                      <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
+                        <div>
+                          <h5 className="font-serif font-bold text-lg text-[#8f4e00] group-hover:text-[#b6171e] transition-colors">{m.name}</h5>
+                          <p className="text-xs text-[#554336] leading-relaxed pt-2 mt-2 border-t border-[#dbc2b0]/20">{m.desc}</p>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -234,24 +238,28 @@ export const AboutView: React.FC<AboutViewProps> = ({ onOpenDonateModal, onOpenC
               </div>
 
               {/* Executive Team */}
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <h3 className="text-xs font-bold uppercase tracking-widest text-[#887364] border-b border-[#dbc2b0]/30 pb-2">
                   समिति के अन्य प्रमुख पदाधिकारी (Executive Officers)
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {executiveMembers.map((m, idx) => (
-                    <div key={idx} className="group p-4 bg-white rounded-2xl shadow-sm border border-[#dbc2b0]/25 hover:shadow-md hover:border-[#8f4e00]/40 transition-all duration-300 flex flex-col sm:flex-row gap-3.5 items-center sm:items-start">
-                      <img
-                        src={m.image}
-                        alt={m.name}
-                        className="w-16 h-16 rounded-xl object-cover border-2 border-[#ff9933]/30 shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform"
-                      />
-                      <div className="space-y-1.5 text-center sm:text-left flex-1">
-                        <div className="flex flex-wrap items-center justify-between gap-1">
-                          <h5 className="font-serif font-bold text-xs md:text-sm text-[#8f4e00] group-hover:text-[#b6171e] transition-colors duration-200">{m.name}</h5>
-                          <span className="text-[10px] font-semibold text-[#705d00] px-2 py-0.5 rounded-full bg-[#ffe16d]/30">{m.role}</span>
+                    <div key={idx} className="group bg-white rounded-3xl overflow-hidden shadow-md border border-[#dbc2b0]/30 hover:shadow-xl hover:border-[#8f4e00]/50 transition-all duration-300 flex flex-col">
+                      <div className="relative h-52 sm:h-56 overflow-hidden bg-slate-100">
+                        <img
+                          src={m.image}
+                          alt={m.name}
+                          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute top-3 right-3 bg-[#705d00] text-amber-100 text-[11px] font-semibold px-2.5 py-0.5 rounded-full shadow-md backdrop-blur-sm">
+                          {m.role}
                         </div>
-                        <p className="text-[11px] text-[#554336] leading-relaxed pt-1 border-t border-[#dbc2b0]/15">{m.desc}</p>
+                      </div>
+                      <div className="p-4 space-y-1.5 flex-1 flex flex-col justify-between">
+                        <div>
+                          <h5 className="font-serif font-bold text-base text-[#8f4e00] group-hover:text-[#b6171e] transition-colors">{m.name}</h5>
+                          <p className="text-[11px] text-[#554336] leading-relaxed pt-1.5 mt-1.5 border-t border-[#dbc2b0]/20">{m.desc}</p>
+                        </div>
                       </div>
                     </div>
                   ))}
