@@ -1,0 +1,6 @@
+{
+  "name": "Dharmotthan Chhath Puja Samiti",
+  "description": "धर्मोत्थान छठ पूजा समिति, मटियाला, दिल्ली - आस्था, सेवा, पारदर्शिता और एकजुटता के साथ छठ पूजा 2026 उत्सव।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
