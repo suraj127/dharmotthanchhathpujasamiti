@@ -163,6 +163,17 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
 
       {/* 2. Gallery Grid */}
       <section className="max-w-[1280px] mx-auto px-6 md:px-12 space-y-8">
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ff9933]/15 text-[#8f4e00] text-xs font-bold border border-[#ff9933]/30">
+            <span className="material-symbols-outlined text-sm">photo_library</span>
+            <span>आधिकारिक चित्र संग्रह</span>
+          </div>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#8f4e00]">
+            आधिकारिक समिति संग्रह <span className="text-xl md:text-2xl font-sans font-normal text-[#554336] opacity-80">(Samiti Collection)</span>
+          </h2>
+          <div className="h-1 w-24 bg-[#8f4e00] mx-auto rounded-full mt-2"></div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {galleryItems.map((item) => (
             <div
