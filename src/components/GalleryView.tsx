@@ -22,11 +22,11 @@ interface GalleryItem {
 }
 
 export const GalleryView: React.FC<GalleryViewProps> = () => {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
   const [activeCategory, setActiveCategory] = useState<'all' | 'puja' | 'ghat' | 'community'>('all');
-  const [viewMode, setViewMode] = useState<'grid' | 'carousel'>('grid');
+  const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
 
-  const horizontalScrollRef = useRef<HTMLDivElement>(null);
+  const thumbnailRibbonRef = useRef<HTMLDivElement>(null);
 
   const galleryItems: GalleryItem[] = [
     {
@@ -163,31 +163,32 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
     ? galleryItems
     : galleryItems.filter((item) => item.category === activeCategory);
 
-  const scrollHorizontal = (direction: 'left' | 'right') => {
-    if (!horizontalScrollRef.current) return;
-    const distance = 420;
-    horizontalScrollRef.current.scrollBy({
-      left: direction === 'left' ? -distance : distance,
-      behavior: 'smooth',
-    });
+  // Safely clamp slide index if category changes
+  const activeSlideIndex = Math.min(currentSlideIndex, filteredItems.length - 1);
+  const activeItem = filteredItems[activeSlideIndex] || filteredItems[0];
+
+  const handlePrevSlide = () => {
+    setCurrentSlideIndex((prev) => (prev > 0 ? prev - 1 : filteredItems.length - 1));
   };
 
-  const handlePrevImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (selectedIndex === null) return;
-    setSelectedIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : filteredItems.length - 1));
+  const handleNextSlide = () => {
+    setCurrentSlideIndex((prev) => (prev < filteredItems.length - 1 ? prev + 1 : 0));
   };
 
-  const handleNextImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (selectedIndex === null) return;
-    setSelectedIndex((prev) => (prev !== null && prev < filteredItems.length - 1 ? prev + 1 : 0));
+  const handleThumbnailClick = (idx: number) => {
+    setCurrentSlideIndex(idx);
+    if (thumbnailRibbonRef.current) {
+      const activeThumb = thumbnailRibbonRef.current.children[idx] as HTMLElement;
+      if (activeThumb) {
+        activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
   };
 
   return (
     <div className="space-y-12 animate-in fade-in duration-300">
-      {/* 1. Hero Section */}
-      <section className="relative min-h-[420px] flex items-center justify-center overflow-hidden rounded-3xl md:rounded-[40px] shadow-2xl mx-3 md:mx-10 mt-3 border border-[#dbc2b0]/30 text-center">
+      {/* 1. Hero Header */}
+      <section className="relative min-h-[380px] flex items-center justify-center overflow-hidden rounded-3xl md:rounded-[40px] shadow-2xl mx-3 md:mx-10 mt-3 border border-[#dbc2b0]/30 text-center">
         <div className="absolute inset-0 z-0">
           <img
             alt="गैलरी"
@@ -209,26 +210,18 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
           </h1>
 
           <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क में छठ पूजा महापर्व के पावन क्षणों, संध्या व प्रातःकालीन अर्घ्य और सामुदायिक एकता की स्मृतियां।
+            ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क में छठ पूजा महापर्व के पावन क्षणों और भक्तिमय माहौल की पावन स्मृतियां।
           </p>
-
-          <div className="flex items-center justify-center gap-6 pt-2">
-            <div className="flex items-center gap-2 text-amber-200 text-xs font-semibold">
-              <span className="material-symbols-outlined text-base">collections</span>
-              <span>16+ एचडी चित्र</span>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* 2. Controls & Category Tabs Toolbar */}
+      {/* 2. Category Filter Pills */}
       <section className="max-w-[1280px] mx-auto px-6 md:px-12">
-        <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#dbc2b0]/30 flex flex-col md:flex-row items-center justify-between gap-4">
-          {/* Category Filter Pills */}
+        <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#dbc2b0]/30 flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-2">
             <button
-              onClick={() => setActiveCategory('all')}
-              className={`px-5 py-2 rounded-xl text-xs md:text-sm font-bold transition-all cursor-pointer ${
+              onClick={() => { setActiveCategory('all'); setCurrentSlideIndex(0); }}
+              className={`px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all cursor-pointer ${
                 activeCategory === 'all'
                   ? 'saffron-gradient text-white shadow-md'
                   : 'bg-[#f4f4f6] text-[#554336] hover:bg-[#e8e8eb]'
@@ -237,8 +230,8 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
               सभी चित्र ({galleryItems.length})
             </button>
             <button
-              onClick={() => setActiveCategory('puja')}
-              className={`px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
+              onClick={() => { setActiveCategory('puja'); setCurrentSlideIndex(0); }}
+              className={`px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeCategory === 'puja'
                   ? 'saffron-gradient text-white shadow-md'
                   : 'bg-[#f4f4f6] text-[#554336] hover:bg-[#e8e8eb]'
@@ -248,8 +241,8 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
               <span>अर्घ्य व पूजा</span>
             </button>
             <button
-              onClick={() => setActiveCategory('ghat')}
-              className={`px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
+              onClick={() => { setActiveCategory('ghat'); setCurrentSlideIndex(0); }}
+              className={`px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeCategory === 'ghat'
                   ? 'saffron-gradient text-white shadow-md'
                   : 'bg-[#f4f4f6] text-[#554336] hover:bg-[#e8e8eb]'
@@ -259,8 +252,8 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
               <span>घाट व्यवस्था</span>
             </button>
             <button
-              onClick={() => setActiveCategory('community')}
-              className={`px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
+              onClick={() => { setActiveCategory('community'); setCurrentSlideIndex(0); }}
+              className={`px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeCategory === 'community'
                   ? 'saffron-gradient text-white shadow-md'
                   : 'bg-[#f4f4f6] text-[#554336] hover:bg-[#e8e8eb]'
@@ -271,307 +264,232 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
             </button>
           </div>
 
-          {/* Horizontal Layout Toggle */}
-          <div className="flex items-center bg-[#f4f4f6] p-1 rounded-xl border border-[#dbc2b0]/20">
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                viewMode === 'grid' ? 'bg-white text-[#8f4e00] shadow-sm font-bold' : 'text-[#776356] hover:text-[#1a1c1e]'
-              }`}
-            >
-              <span className="material-symbols-outlined text-sm">view_agenda</span>
-              <span>हॉरिजॉन्टल कार्ड्स</span>
-            </button>
-            <button
-              onClick={() => setViewMode('carousel')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                viewMode === 'carousel' ? 'bg-white text-[#8f4e00] shadow-sm font-bold' : 'text-[#776356] hover:text-[#1a1c1e]'
-              }`}
-            >
-              <span className="material-symbols-outlined text-sm">view_carousel</span>
-              <span>स्लाइडर रील</span>
-            </button>
+          <div className="text-xs text-[#887364] font-semibold flex items-center gap-1">
+            <span className="material-symbols-outlined text-sm text-[#ff9933]">swipe</span>
+            <span>स्लाइडर प्रस्तुति ({activeSlideIndex + 1} / {filteredItems.length})</span>
           </div>
         </div>
       </section>
 
-      {/* 3. FEATURED HORIZONTAL SPOTLIGHT SLIDER (Horizontal Scroll Ribbon) */}
-      <section className="max-w-[1280px] mx-auto px-6 md:px-12 space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-[#ff9933] animate-ping"></span>
-            <h2 className="font-serif text-xl md:text-2xl font-bold text-[#8f4e00]">
-              मुख्य आकर्षण
-            </h2>
-          </div>
-
-          {/* Navigation Arrow Buttons */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => scrollHorizontal('left')}
-              className="w-9 h-9 rounded-full bg-white border border-[#dbc2b0]/40 text-[#8f4e00] flex items-center justify-center shadow-sm hover:bg-[#8f4e00] hover:text-white transition-all cursor-pointer"
-              title="पिछला (Previous)"
-            >
-              <span className="material-symbols-outlined text-lg">arrow_back</span>
-            </button>
-            <button
-              onClick={() => scrollHorizontal('right')}
-              className="w-9 h-9 rounded-full bg-white border border-[#dbc2b0]/40 text-[#8f4e00] flex items-center justify-center shadow-sm hover:bg-[#8f4e00] hover:text-white transition-all cursor-pointer"
-              title="अगला (Next)"
-            >
-              <span className="material-symbols-outlined text-lg">arrow_forward</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Horizontal Continuous Ribbon */}
-        <div
-          ref={horizontalScrollRef}
-          className="flex gap-5 overflow-x-auto scrollbar-none py-2 snap-x snap-mandatory scroll-smooth"
-        >
-          {filteredItems.map((item, idx) => (
-            <div
-              key={item.id}
-              onClick={() => setSelectedIndex(idx)}
-              className="flex-shrink-0 w-80 sm:w-96 snap-start bg-white rounded-3xl overflow-hidden border border-[#dbc2b0]/35 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group flex flex-col justify-between"
-            >
-              <div className="relative h-52 overflow-hidden">
-                <img
-                  src={item.url}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-
-                {/* Category Badge & Index Pill */}
-                <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-                  <span className="px-3 py-1 bg-black/50 backdrop-blur-md border border-amber-300/40 text-amber-200 text-[11px] font-bold rounded-full">
-                    {item.categoryLabel}
-                  </span>
-                  <span className="px-2.5 py-0.5 bg-amber-400 text-black text-xs font-extrabold rounded-full shadow-md">
-                    #{String(idx + 1).padStart(2, '0')}
-                  </span>
-                </div>
-
-                {/* Bottom Overlay Title */}
-                <div className="absolute bottom-3 left-3 right-3 z-10">
-                  <h3 className="text-white font-serif font-bold text-base drop-shadow-md group-hover:text-amber-300 transition-colors">
-                    {item.title}
-                  </h3>
-                </div>
-              </div>
-
-              <div className="p-4 bg-gradient-to-b from-white to-[#fffcf7] space-y-3">
-                <p className="text-[#554336] text-xs leading-relaxed line-clamp-2">
-                  {item.subtitle}
-                </p>
-                <div className="flex items-center justify-between text-xs font-semibold text-[#8f4e00] pt-2 border-t border-[#dbc2b0]/20">
-                  <span className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                    <span>बड़ा देखें (Full View)</span>
-                    <span className="material-symbols-outlined text-sm">open_in_full</span>
-                  </span>
-                  <span className="text-[10px] text-[#887364]">सोम बाज़ार घाट</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 4. MAIN HORIZONTAL LANDSCAPE CARDS GRID */}
-      {viewMode === 'grid' ? (
-        <section className="max-w-[1280px] mx-auto px-6 md:px-12 space-y-6">
-          <div className="border-b border-[#dbc2b0]/30 pb-3 flex items-center justify-between">
-            <h3 className="font-serif text-2xl font-bold text-[#1a1c1e]">
-              चित्र संग्रह ({filteredItems.length})
-            </h3>
-            <span className="text-xs text-[#887364] font-medium">स्मृति दीर्घा</span>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {filteredItems.map((item, idx) => (
-              <div
-                key={item.id}
-                onClick={() => setSelectedIndex(idx)}
-                className="group bg-white rounded-3xl overflow-hidden shadow-md border border-[#dbc2b0]/30 cursor-pointer hover:shadow-xl hover:border-[#8f4e00]/40 transition-all duration-300 flex flex-col sm:flex-row h-full"
-              >
-                {/* Horizontal Left Photo Container (Fixed aspect landscape) */}
-                <div className="sm:w-5/12 relative h-56 sm:h-auto overflow-hidden flex-shrink-0">
-                  <img
-                    src={item.url}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
-                    <span className="text-white text-[11px] font-semibold flex items-center gap-1 bg-black/50 px-2.5 py-1 rounded-full backdrop-blur-sm">
-                      <span className="material-symbols-outlined text-xs">zoom_in</span>
-                      ज़ूम करें
-                    </span>
-                  </div>
-                  {/* Photo Index Tag */}
-                  <div className="absolute top-3 left-3 bg-[#b6171e] text-white px-2.5 py-0.5 rounded-lg text-[11px] font-bold shadow-md">
-                    #{String(idx + 1).padStart(2, '0')}
-                  </div>
-                </div>
-
-                {/* Horizontal Right Info Content */}
-                <div className="sm:w-7/12 p-6 flex flex-col justify-between space-y-3 bg-gradient-to-br from-white via-white to-[#fffaf4]">
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="px-2.5 py-0.5 bg-[#ff9933]/15 border border-[#ff9933]/30 text-[#8f4e00] text-[10px] font-bold rounded-full">
-                        {item.categoryLabel}
-                      </span>
-                      <span className="text-[10px] font-semibold text-[#887364] flex items-center gap-1">
-                        <span className="material-symbols-outlined text-xs">location_on</span>
-                        नन्हे पार्क
-                      </span>
-                    </div>
-
-                    <h4 className="font-serif text-lg font-bold text-[#8f4e00] group-hover:text-[#b6171e] transition-colors leading-snug">
-                      {item.title}
-                    </h4>
-
-                    <p className="text-[#554336] text-xs leading-relaxed">
-                      {item.subtitle}
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-[#dbc2b0]/20 flex items-center justify-between">
-                    <span className="text-[11px] font-semibold text-[#8f4e00] flex items-center gap-1">
-                      <span>विस्तृत देखें</span>
-                      <span className="material-symbols-outlined text-xs">arrow_forward</span>
-                    </span>
-                    <span className="text-[10px] text-gray-400">धर्मोत्थान छठ 2026</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      ) : (
-        /* Alternate Horizontal Carousel Slide Track */
-        <section className="max-w-[1280px] mx-auto px-6 md:px-12">
-          <div className="bg-[#2e1500] rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl space-y-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <span className="text-amber-300 text-xs uppercase tracking-widest font-bold">स्लाइडर रील व्यू</span>
-                <h3 className="font-serif text-2xl md:text-3xl font-bold text-amber-100 mt-1">
-                  चित्र संग्रह
-                </h3>
-              </div>
-              <span className="text-xs bg-amber-400 text-black font-bold px-3 py-1 rounded-full">
-                16 Photos
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              {filteredItems.map((item, idx) => (
-                <div
-                  key={item.id}
-                  onClick={() => setSelectedIndex(idx)}
-                  className="group bg-black/40 border border-amber-300/20 rounded-2xl overflow-hidden cursor-pointer hover:border-amber-400 transition-all p-2 space-y-2"
-                >
-                  <div className="relative h-40 rounded-xl overflow-hidden">
-                    <img src={item.url} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" referrerPolicy="no-referrer" />
-                    <div className="absolute top-2 left-2 bg-black/60 text-amber-200 px-2 py-0.5 rounded text-[10px] font-bold">
-                      #{idx + 1}
-                    </div>
-                  </div>
-                  <h5 className="font-serif text-xs font-bold text-amber-100 truncate">{item.title}</h5>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* 5. LIGHTBOX FULL-SCREEN HORIZONTAL VIEWER */}
-      {selectedIndex !== null && filteredItems[selectedIndex] && (
-        <div
-          onClick={() => setSelectedIndex(null)}
-          className="fixed inset-0 z-50 bg-black/92 backdrop-blur-lg flex items-center justify-center p-4 animate-in fade-in duration-200"
-        >
-          {/* Main Container */}
+      {/* 3. MAIN PURE SLIDER / CAROUSEL DECK (JUST SLIDE) */}
+      <section className="max-w-[1280px] mx-auto px-6 md:px-12 space-y-6">
+        <div className="relative bg-white rounded-3xl md:rounded-[36px] overflow-hidden border border-[#dbc2b0]/35 shadow-2xl flex flex-col lg:flex-row min-h-[480px] md:min-h-[540px]">
+          
+          {/* Main Slide Photo Frame (Left 65% on Desktop) */}
           <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative max-w-5xl w-full bg-[#1a0f05] border border-amber-500/30 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
+            onClick={() => setIsLightboxOpen(true)}
+            className="lg:w-2/3 relative h-72 sm:h-96 lg:h-auto overflow-hidden bg-black cursor-pointer group"
           >
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedIndex(null)}
-              className="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-black/60 border border-white/20 text-white flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer"
-              title="बंद करें (Close)"
-            >
-              <span className="material-symbols-outlined text-xl">close</span>
-            </button>
+            <img
+              key={activeItem.id}
+              src={activeItem.url}
+              alt={activeItem.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 animate-in fade-in"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-            {/* Left/Previous Arrow */}
+            {/* Left Arrow Navigation Button */}
             <button
-              onClick={handlePrevImage}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-black/60 border border-amber-300/30 text-amber-200 flex items-center justify-center hover:bg-amber-500 hover:text-black transition-all cursor-pointer shadow-xl"
-              title="पिछली फोटो (Previous)"
+              onClick={(e) => { e.stopPropagation(); handlePrevSlide(); }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/60 border border-white/30 text-white flex items-center justify-center shadow-2xl hover:bg-[#ff9933] hover:border-[#ff9933] transition-all cursor-pointer hover:scale-110 active:scale-95"
+              title="पिछला स्लाइड (Previous Slide)"
             >
               <span className="material-symbols-outlined text-2xl">chevron_left</span>
             </button>
 
-            {/* Right/Next Arrow */}
+            {/* Right Arrow Navigation Button */}
             <button
-              onClick={handleNextImage}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-black/60 border border-amber-300/30 text-amber-200 flex items-center justify-center hover:bg-amber-500 hover:text-black transition-all cursor-pointer shadow-xl"
+              onClick={(e) => { e.stopPropagation(); handleNextSlide(); }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/60 border border-white/30 text-white flex items-center justify-center shadow-2xl hover:bg-[#ff9933] hover:border-[#ff9933] transition-all cursor-pointer hover:scale-110 active:scale-95"
+              title="अगला स्लाइड (Next Slide)"
+            >
+              <span className="material-symbols-outlined text-2xl">chevron_right</span>
+            </button>
+
+            {/* Category Tag & Slide Counter Badge */}
+            <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+              <span className="px-3.5 py-1 bg-black/60 backdrop-blur-md border border-amber-300/40 text-amber-200 text-xs font-bold rounded-full shadow-lg">
+                {activeItem.categoryLabel}
+              </span>
+              <span className="px-3 py-1 bg-[#b6171e] text-white text-xs font-extrabold rounded-full shadow-lg">
+                #{String(activeSlideIndex + 1).padStart(2, '0')} / {String(filteredItems.length).padStart(2, '0')}
+              </span>
+            </div>
+
+            {/* Fullscreen Zoom Hint */}
+            <div className="absolute bottom-4 left-4 z-10 opacity-80 group-hover:opacity-100 transition-opacity">
+              <span className="px-3 py-1 bg-black/60 backdrop-blur-md text-white text-xs font-semibold rounded-full flex items-center gap-1.5 border border-white/20">
+                <span className="material-symbols-outlined text-sm">zoom_in</span>
+                <span>पूर्ण चित्र देखें</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Active Slide Info Content Panel (Right 35% on Desktop) */}
+          <div className="lg:w-1/3 p-6 md:p-8 bg-gradient-to-br from-[#2e1500] via-[#241000] to-[#170900] text-white flex flex-col justify-between space-y-6">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between text-xs text-amber-300/80 font-bold border-b border-amber-500/20 pb-3">
+                <span>स्लाइड {activeSlideIndex + 1}</span>
+                <span>सोम बाज़ार, नन्हे पार्क घाट</span>
+              </div>
+
+              <h2 className="font-serif text-2xl md:text-3xl font-bold text-amber-100 leading-snug">
+                {activeItem.title}
+              </h2>
+
+              <div className="h-[2px] w-16 bg-[#ff9933] rounded-full"></div>
+
+              <p className="text-amber-100/85 text-xs md:text-sm leading-relaxed">
+                {activeItem.subtitle}
+              </p>
+            </div>
+
+            {/* Slide Navigation Buttons */}
+            <div className="pt-6 border-t border-amber-500/20 space-y-4">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handlePrevSlide}
+                  className="flex-1 py-3 bg-white/10 hover:bg-white/20 border border-amber-300/20 rounded-xl text-xs font-bold text-amber-100 flex items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95"
+                >
+                  <span className="material-symbols-outlined text-base">arrow_back</span>
+                  <span>पिछला</span>
+                </button>
+                <button
+                  onClick={handleNextSlide}
+                  className="flex-1 py-3 saffron-gradient text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-lg hover:scale-102 transition-all cursor-pointer active:scale-95"
+                >
+                  <span>अगला</span>
+                  <span className="material-symbols-outlined text-base">arrow_forward</span>
+                </button>
+              </div>
+
+              <button
+                onClick={() => setIsLightboxOpen(true)}
+                className="w-full py-2.5 bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-300 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-sm">fullscreen</span>
+                <span>फुल स्क्रीन में देखें</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Horizontal Slider Thumbnail Ribbon */}
+        <div className="space-y-2 pt-2">
+          <div className="flex items-center justify-between text-xs font-semibold text-[#8f4e00]">
+            <span>थंबनेल रील (Click to Jump Slide):</span>
+            <span>{filteredItems.length} चित्र उपलब्ध</span>
+          </div>
+
+          <div
+            ref={thumbnailRibbonRef}
+            className="flex gap-3 overflow-x-auto scrollbar-none py-2 px-1 snap-x snap-mandatory scroll-smooth"
+          >
+            {filteredItems.map((item, idx) => (
+              <button
+                key={item.id}
+                onClick={() => handleThumbnailClick(idx)}
+                className={`flex-shrink-0 relative w-24 h-16 sm:w-32 sm:h-20 rounded-2xl overflow-hidden border-2 transition-all duration-300 cursor-pointer snap-start ${
+                  idx === activeSlideIndex
+                    ? 'border-[#ff9933] ring-4 ring-[#ff9933]/30 scale-105 shadow-lg'
+                    : 'border-transparent opacity-60 hover:opacity-100 hover:scale-102'
+                }`}
+              >
+                <img src={item.url} alt={item.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <div className="absolute top-1 left-1 bg-black/70 text-amber-200 text-[10px] font-bold px-1.5 py-0.5 rounded">
+                  #{idx + 1}
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. FULL-SCREEN LIGHTBOX MODAL */}
+      {isLightboxOpen && (
+        <div
+          onClick={() => setIsLightboxOpen(false)}
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 animate-in fade-in duration-200"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-5xl w-full bg-[#1c0d02] border border-amber-500/30 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setIsLightboxOpen(false)}
+              className="absolute top-4 right-4 z-40 w-11 h-11 rounded-full bg-black/70 border border-white/20 text-white flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer"
+              title="बंद करें (Close)"
+            >
+              <span className="material-symbols-outlined text-2xl">close</span>
+            </button>
+
+            {/* Left Arrow Button */}
+            <button
+              onClick={handlePrevSlide}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full bg-black/70 border border-amber-300/30 text-amber-200 flex items-center justify-center hover:bg-amber-500 hover:text-black transition-all cursor-pointer shadow-2xl"
+              title="पिछला फोटो (Previous)"
+            >
+              <span className="material-symbols-outlined text-2xl">chevron_left</span>
+            </button>
+
+            {/* Right Arrow Button */}
+            <button
+              onClick={handleNextSlide}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full bg-black/70 border border-amber-300/30 text-amber-200 flex items-center justify-center hover:bg-amber-500 hover:text-black transition-all cursor-pointer shadow-2xl"
               title="अगली फोटो (Next)"
             >
               <span className="material-symbols-outlined text-2xl">chevron_right</span>
             </button>
 
-            {/* Full HD Photo Display Area */}
-            <div className="md:w-2/3 bg-black/80 flex items-center justify-center p-4 relative min-h-[300px] md:min-h-[500px]">
+            {/* Photo Preview Container */}
+            <div className="md:w-2/3 bg-black flex items-center justify-center p-4 min-h-[320px] md:min-h-[500px]">
               <img
-                src={filteredItems[selectedIndex].url}
-                alt={filteredItems[selectedIndex].title}
-                className="max-w-full max-h-[70vh] md:max-h-[80vh] object-contain rounded-xl drop-shadow-2xl"
+                src={activeItem.url}
+                alt={activeItem.title}
+                className="max-w-full max-h-[75vh] object-contain rounded-xl drop-shadow-2xl"
                 referrerPolicy="no-referrer"
               />
             </div>
 
-            {/* Right Details Panel */}
-            <div className="md:w-1/3 p-6 md:p-8 space-y-6 flex flex-col justify-between border-t md:border-t-0 md:border-l border-amber-500/20 bg-gradient-to-b from-[#241306] to-[#140a03]">
+            {/* Photo Info Side Panel */}
+            <div className="md:w-1/3 p-6 md:p-8 space-y-6 flex flex-col justify-between border-t md:border-t-0 md:border-l border-amber-500/20 bg-gradient-to-b from-[#281303] to-[#120701] text-white">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="px-3 py-1 bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold rounded-full">
-                    {filteredItems[selectedIndex].categoryLabel}
+                    {activeItem.categoryLabel}
                   </span>
                   <span className="text-amber-200/70 text-xs font-bold">
-                    {selectedIndex + 1} / {filteredItems.length}
+                    {activeSlideIndex + 1} / {filteredItems.length}
                   </span>
                 </div>
 
                 <h3 className="font-serif text-xl md:text-2xl font-bold text-amber-100 leading-snug">
-                  {filteredItems[selectedIndex].title}
+                  {activeItem.title}
                 </h3>
 
-                <div className="h-[1px] w-16 bg-amber-400/40"></div>
+                <div className="h-[2px] w-12 bg-amber-400"></div>
 
                 <p className="text-amber-100/80 text-xs md:text-sm leading-relaxed">
-                  {filteredItems[selectedIndex].subtitle}
+                  {activeItem.subtitle}
                 </p>
               </div>
 
               <div className="pt-4 border-t border-amber-500/20 space-y-3">
-                <div className="flex items-center justify-between text-xs text-amber-200/60">
+                <div className="flex justify-between text-xs text-amber-200/60">
                   <span>स्थान: ई-ब्लॉक सोम बाज़ार</span>
-                  <span>धर्मोत्थान छठ पूजा</span>
+                  <span>धर्मोत्थान छठ 2026</span>
                 </div>
                 <div className="flex gap-2">
                   <button
-                    onClick={handlePrevImage}
+                    onClick={handlePrevSlide}
                     className="flex-1 py-2.5 bg-white/10 hover:bg-white/20 rounded-xl text-xs text-amber-200 font-semibold transition-colors cursor-pointer"
                   >
                     ◄ पिछला
                   </button>
                   <button
-                    onClick={handleNextImage}
+                    onClick={handleNextSlide}
                     className="flex-1 py-2.5 bg-amber-500 text-black hover:bg-amber-400 rounded-xl text-xs font-bold transition-colors cursor-pointer"
                   >
                     अगला ►
