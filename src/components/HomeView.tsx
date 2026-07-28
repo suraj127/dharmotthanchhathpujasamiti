@@ -219,65 +219,87 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
-      {/* 3. Upcoming Event Card Section */}
-      <section className="py-6 max-w-[1280px] mx-auto px-6 md:px-12">
-        <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-[#dbc2b0]/30 flex flex-col md:flex-row">
-          <div className="md:w-1/2 relative h-64 md:h-auto">
+      {/* 3. Upcoming Event Card Section - Emotional Devotional Touch */}
+      <section className="py-8 max-w-[1280px] mx-auto px-6 md:px-12">
+        <div className="bg-gradient-to-br from-white via-[#fffaf5] to-[#fff5eb] rounded-3xl overflow-hidden shadow-2xl border border-[#ff9933]/30 flex flex-col lg:flex-row relative">
+          
+          {/* Left: Real Som Bazar Ghat Photo with Devotional Quote Overlay */}
+          <div className="lg:w-1/2 relative min-h-[320px] lg:min-h-[440px] overflow-hidden group">
             <img
-              alt="सजा हुआ घाट"
-              className="w-full h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXslVGB0mhG38f21dq6SVo6Z5ueCCa_KrMaB5ZcItmr6Nyie5kIih1ShjRXMw-PVLmJgEQPlgykSfFRl-aZMd7uIB6Z37jsMjcz1Q-2Q1rom76m26iHep645MdlothVsG3FRaTBcIDf2kyGVv6jjDO8jB2cg3UagFP0RgW619vea4RJuWnmpoBRXuPT-6_DFR_AG04pPWEUiPV3q-foIgOS5VGRTTgJ-rsIaa_wLGdTb002-reo2raRS7uebpazmcy3gh66oyUupI=s1600"
+              alt="सोम बाज़ार छठ घाट"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              src="/gallery/chhath-1.jpeg"
             />
-            <div className="absolute top-5 left-5 bg-[#b6171e] text-white px-4 py-1.5 rounded-lg text-xs font-semibold shadow-lg">
-              आगामी: नवंबर 2026
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent flex flex-col justify-end p-6 md:p-8 text-white space-y-2">
+              <span className="inline-block px-3.5 py-1 bg-[#ff9933]/90 text-white rounded-full text-xs font-semibold self-start shadow-md">
+                पवित्र महापर्व • नवंबर 2026
+              </span>
+              <p className="font-serif italic text-amber-200 text-sm md:text-base leading-relaxed text-glow">
+                "केलवा के पात पर उगेलन सूरज देव, झुकिए झुकिए अरघ दिहल जाइ..."
+              </p>
+              <p className="text-white/80 text-xs">
+                माताओं का 36 घंटे का कठिन निर्जला व्रत, परिवार की समृद्धि और छठी मैया की असीम कृपा का पावन पर्व।
+              </p>
             </div>
           </div>
 
-          <div className="md:w-1/2 p-8 md:p-10 space-y-6">
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#1a1c1e]">
-              छठ पूजा उत्सव 2026: ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क
-            </h2>
+          {/* Right: Devotional Info & Sacred Timings */}
+          <div className="lg:w-1/2 p-8 md:p-10 space-y-6 flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#ffdad6] text-[#b6171e] text-xs font-bold">
+                <span className="material-symbols-outlined text-sm">favorite</span>
+                <span>एक अटूट आस्था, एक परिवार</span>
+              </div>
 
-            <div className="flex items-start gap-4">
-              <span className="material-symbols-outlined text-[#8f4e00] bg-[#ffdcc2] p-2.5 rounded-xl text-xl flex-shrink-0">
-                location_on
-              </span>
-              <div>
-                <h4 className="font-semibold text-sm text-[#1a1c1e]">मुख्य स्थान</h4>
-                <p className="text-[#554336] text-xs md:text-sm mt-0.5">
-                  ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क, दिल्ली – 110059
-                </p>
+              <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#8f4e00] leading-tight">
+                छठ पूजा उत्सव 2026: सोम बाज़ार, नन्हे पार्क घाट
+              </h2>
+
+              <p className="text-[#554336] text-xs md:text-sm leading-relaxed italic bg-[#ffdcc2]/30 p-4 rounded-2xl border border-[#ff9933]/20">
+                "जब गंगाजल की पावन बूंदें, गन्ने का मंडप और संध्या-अर्घ्य का दीप प्रज्वलित होता है, तो सोम बाज़ार घाट हर श्रद्धालु का अपना पवित्र घर बन जाता है।"
+              </p>
+            </div>
+
+            {/* Sacred Timings Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div className="p-4 bg-white rounded-2xl border border-[#dbc2b0]/40 shadow-sm space-y-1">
+                <div className="flex items-center gap-2 text-[#8f4e00] font-bold text-xs">
+                  <span className="material-symbols-outlined text-base">wb_twilight</span>
+                  <span>संध्या अर्घ्य (16 नवंबर)</span>
+                </div>
+                <p className="text-xs text-[#554336]">अस्ताचलगामी भास्कर देव को प्रथम अर्घ्य व महाआरती</p>
+                <div className="text-xs font-bold text-[#b6171e] pt-1">शाम 5:28 PM</div>
+              </div>
+
+              <div className="p-4 bg-white rounded-2xl border border-[#dbc2b0]/40 shadow-sm space-y-1">
+                <div className="flex items-center gap-2 text-[#8f4e00] font-bold text-xs">
+                  <span className="material-symbols-outlined text-base">wb_sunny</span>
+                  <span>उषा अर्घ्य (17 नवंबर)</span>
+                </div>
+                <p className="text-xs text-[#554336]">उदीयमान सूर्यदेव को अर्घ्य व पावन पारण</p>
+                <div className="text-xs font-bold text-[#b6171e] pt-1">सुबह 6:42 AM</div>
               </div>
             </div>
 
-            <div className="flex items-start gap-4">
-              <span className="material-symbols-outlined text-[#8f4e00] bg-[#ffdcc2] p-2.5 rounded-xl text-xl flex-shrink-0">
-                event
-              </span>
-              <div>
-                <h4 className="font-semibold text-sm text-[#1a1c1e]">कार्यक्रम अनुसूची</h4>
-                <p className="text-[#554336] text-xs md:text-sm mt-0.5">
-                  4-दिवसीय भव्य महोत्सव। वैदिक मंत्रोच्चार के साथ 2026 के उत्सव का उद्घाटन समारोह।
-                </p>
-              </div>
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <button
+                onClick={onOpenEventGuideModal}
+                className="flex-1 py-3.5 saffron-gradient text-white rounded-xl font-semibold text-xs md:text-sm shadow-md hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-base">book_online</span>
+                <span>उत्सव दिशानिर्देश देखें</span>
+              </button>
+
+              <button
+                onClick={onOpenContactModal}
+                className="px-6 py-3.5 border-2 border-[#8f4e00] text-[#8f4e00] rounded-xl font-semibold text-xs md:text-sm hover:bg-[#8f4e00] hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-base">call</span>
+                <span>संपर्क / सेवा सहायता</span>
+              </button>
             </div>
 
-            <div className="pt-3 border-t border-[#dbc2b0]/30 space-y-2">
-              <div className="flex justify-between text-xs font-semibold">
-                <span className="text-[#1a1c1e]">तैयारी की प्रगति</span>
-                <span className="text-[#8f4e00]">65%</span>
-              </div>
-              <div className="w-full h-3 bg-[#e2e2e5] rounded-full overflow-hidden">
-                <div className="h-full saffron-gradient w-[65%] rounded-full"></div>
-              </div>
-            </div>
-
-            <button
-              onClick={onOpenEventGuideModal}
-              className="w-full md:w-auto px-7 py-3 bg-[#b6171e] text-white rounded-xl font-semibold text-xs md:text-sm hover:bg-[#b6171e]/90 transition-all cursor-pointer shadow-md"
-            >
-              ईवेंट गाइड देखें
-            </button>
           </div>
         </div>
       </section>
