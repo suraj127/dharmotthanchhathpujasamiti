@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { OFFICIAL_LOGO_URL } from '../constants';
+import { OFFICIAL_LOGO_URL, CONTACT_PHONE, CONTACT_EMAIL } from '../constants';
 import { submitFormAndSendEmail } from '../lib/emailService';
 
 interface FooterProps {
@@ -91,13 +91,20 @@ export const Footer: React.FC<FooterProps> = ({
             <h4 className="font-semibold text-sm text-[#b6171e] mb-4 uppercase tracking-wider">त्वरित संपर्क</h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <button onClick={onOpenContactModal} className="text-[#554336] hover:text-[#b6171e] underline underline-offset-4 transition-colors">
-                  संपर्क करें
-                </button>
+                <a href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`} className="flex items-center gap-1.5 text-xs text-[#554336] hover:text-[#b6171e] transition-colors">
+                  <span className="material-symbols-outlined text-base text-[#8f4e00]">call</span>
+                  <span className="font-medium">{CONTACT_PHONE}</span>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('chhath2026')} className="text-[#554336] hover:text-[#b6171e] underline underline-offset-4 transition-colors">
-                  दिशानिर्देश
+                <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-1.5 text-xs text-[#554336] hover:text-[#b6171e] transition-colors break-all">
+                  <span className="material-symbols-outlined text-base text-[#8f4e00]">mail</span>
+                  <span className="font-medium">{CONTACT_EMAIL}</span>
+                </a>
+              </li>
+              <li className="pt-1">
+                <button onClick={onOpenContactModal} className="text-[#554336] hover:text-[#b6171e] underline underline-offset-4 transition-colors">
+                  ऑनलाइन संदेश भेजें
                 </button>
               </li>
               <li>

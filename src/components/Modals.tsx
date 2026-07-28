@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { OFFICIAL_LOGO_URL } from '../constants';
+import { OFFICIAL_LOGO_URL, CONTACT_PHONE, CONTACT_EMAIL } from '../constants';
 import { submitFormAndSendEmail } from '../lib/emailService';
 
 interface ModalProps {
@@ -177,8 +177,19 @@ export const ContactModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           </div>
           <h3 className="font-serif text-2xl font-bold text-[#b6171e]">हमसे संपर्क करें</h3>
           <p className="text-[#554336] text-xs mt-1">
-            धर्मोत्थान छठ पूजा समिति (ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क)। आपकी सेवा और सुझाव के लिए तत्पर।
+            धर्मोत्थान छठ पूजा समिति (ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क)
           </p>
+
+          <div className="mt-4 p-3.5 bg-[#f8f5f0] border border-[#dbc2b0]/50 rounded-2xl flex flex-col sm:flex-row items-center justify-around gap-2 text-xs">
+            <a href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`} className="flex items-center gap-1.5 text-[#8f4e00] font-bold hover:text-[#b6171e] transition-colors">
+              <span className="material-symbols-outlined text-base">call</span>
+              <span>{CONTACT_PHONE}</span>
+            </a>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-1.5 text-[#8f4e00] font-bold hover:text-[#b6171e] transition-colors break-all">
+              <span className="material-symbols-outlined text-base">mail</span>
+              <span>{CONTACT_EMAIL}</span>
+            </a>
+          </div>
         </div>
 
         {submitted ? (
