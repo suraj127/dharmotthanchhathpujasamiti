@@ -87,3 +87,41 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #8f4e00;
 }
+
+/* View Transitions Styles */
+::view-transition-group(site-navbar) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-navbar),
+::view-transition-new(site-navbar) {
+  animation: none;
+}
+
+::view-transition-old(root) {
+  animation: 220ms ease-out both fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 260ms ease-in both fade-in;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}

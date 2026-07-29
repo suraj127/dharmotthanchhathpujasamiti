@@ -124,6 +124,16 @@ export default function App() {
     setCommunityPhotos((prev) => [newPhoto, ...prev]);
   };
 
+  const handleTabChange = (tab: string) => {
+    if (typeof document !== 'undefined' && (document as any).startViewTransition) {
+      (document as any).startViewTransition(() => {
+        setCurrentTab(tab);
+      });
+    } else {
+      setCurrentTab(tab);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f9f9fc] text-[#1a1c1e] flex flex-col font-sans">
       {/* Devotional Animated Preloader */}
@@ -132,7 +142,7 @@ export default function App() {
       {/* Top Navigation */}
       <Navbar
         currentTab={currentTab}
-        setCurrentTab={setCurrentTab}
+        setCurrentTab={handleTabChange}
         onOpenDonateModal={() => setIsDonateModalOpen(true)}
       />
 
@@ -140,7 +150,7 @@ export default function App() {
       <main className="flex-1">
         {currentTab === 'home' && (
           <HomeView
-            setCurrentTab={setCurrentTab}
+            setCurrentTab={handleTabChange}
             onOpenEventGuideModal={() => setIsEventGuideModalOpen(true)}
             onOpenContactModal={() => setIsContactModalOpen(true)}
             onOpenVolunteerModal={() => setIsVolunteerModalOpen(true)}
@@ -174,7 +184,7 @@ export default function App() {
 
       {/* Shared Footer */}
       <Footer
-        setCurrentTab={setCurrentTab}
+        setCurrentTab={handleTabChange}
         onOpenContactModal={() => setIsContactModalOpen(true)}
         onOpenMapModal={() => setIsMapModalOpen(true)}
         onOpenDonateModal={() => setIsDonateModalOpen(true)}

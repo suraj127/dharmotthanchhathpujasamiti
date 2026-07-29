@@ -24,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
   };
 
   return (
-    <nav className="bg-[#f9f9fc]/90 backdrop-blur-md text-[#8f4e00] sticky top-0 z-50 border-b border-[#dbc2b0]/30 shadow-sm transition-all">
+    <nav style={{ viewTransitionName: 'site-navbar' }} className="bg-[#f9f9fc]/90 backdrop-blur-md text-[#8f4e00] sticky top-0 z-50 border-b border-[#dbc2b0]/30 shadow-sm transition-all">
       <div className="flex justify-between items-center w-full px-4 md:px-12 py-3.5 max-w-[1280px] mx-auto">
         {/* Logo & Title */}
         <button 
@@ -35,6 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
             <img 
               src={OFFICIAL_LOGO_URL} 
               alt="धर्मोत्थान छठ पूजा समिति लोगो" 
+              style={{ viewTransitionName: 'divine-logo' }}
               className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform"
             />
           </div>
