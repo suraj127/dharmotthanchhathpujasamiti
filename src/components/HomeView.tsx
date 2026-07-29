@@ -248,15 +248,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </button>
           </div>
 
-          {/* Horizontal Scroll Hint for Mobile */}
-          <div className="flex sm:hidden items-center justify-between text-xs text-[#8f4e00] font-semibold bg-[#ff9933]/10 px-4 py-2 rounded-xl border border-[#ff9933]/20">
-            <span className="flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-sm text-[#ff9933] animate-pulse">swipe_left</span>
-              <span>सदस्यों को देखने के लिए बाएं-दाएं स्वाइप करें</span>
-            </span>
-            <span className="text-[10px] text-[#887364] font-bold">◄ स्वाइप करें ►</span>
-          </div>
-
           <div className="flex overflow-x-auto snap-x snap-mandatory space-x-3 sm:space-x-0 pb-4 pt-1 sm:pb-0 sm:pt-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 styled-scrollbar scroll-smooth">
             {[
               {

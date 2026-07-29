@@ -258,14 +258,14 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
         </div>
       </section>
 
-      {/* 3. ALL PHOTOS AT ONCE UNIFORM GRID */}
-      <section className="max-w-[1280px] mx-auto px-6 md:px-12 space-y-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {/* 3. ALL PHOTOS AT ONCE: Horizontal Scroll Carousel on Mobile, Uniform Grid on Desktop */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12 space-y-6">
+        <div className="flex overflow-x-auto snap-x snap-mandatory space-x-3 sm:space-x-0 pb-4 pt-1 sm:pb-0 sm:pt-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6 styled-scrollbar scroll-smooth">
           {filteredItems.map((item, idx) => (
             <div
               key={item.id}
               onClick={() => setSelectedIndex(idx)}
-              className="group bg-white rounded-3xl overflow-hidden shadow-md border border-[#dbc2b0]/30 hover:shadow-2xl hover:border-[#8f4e00]/50 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+              className="w-[44vw] min-w-[155px] max-w-[220px] sm:w-full flex-shrink-0 snap-start group bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-[#dbc2b0]/30 hover:shadow-2xl hover:border-[#8f4e00]/50 transition-all duration-300 cursor-pointer flex flex-col justify-between"
             >
               {/* Photo Frame Container (Uniform 16:10 aspect ratio) */}
               <div className="relative aspect-[16/10] overflow-hidden bg-black/5">
@@ -275,41 +275,41 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
                   className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
-                  <span className="text-white text-[11px] font-semibold flex items-center gap-1 bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2 sm:p-3">
+                  <span className="text-white text-[10px] sm:text-[11px] font-semibold flex items-center gap-1 bg-black/50 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full backdrop-blur-sm">
                     <span className="material-symbols-outlined text-xs">zoom_in</span>
                     बड़ा देखें
                   </span>
                 </div>
 
                 {/* Category Badge & Photo Number Tag */}
-                <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-                  <span className="px-2.5 py-0.5 bg-black/50 backdrop-blur-md border border-amber-300/40 text-amber-200 text-[10px] font-bold rounded-full">
+                <div className="absolute top-2 left-2 right-2 sm:top-3 sm:left-3 sm:right-3 flex items-center justify-between z-10">
+                  <span className="px-2 py-0.5 sm:px-2.5 bg-black/50 backdrop-blur-md border border-amber-300/40 text-amber-200 text-[9px] sm:text-[10px] font-bold rounded-full truncate max-w-[65%]">
                     {item.categoryLabel}
                   </span>
-                  <span className="px-2 py-0.5 bg-[#b6171e] text-white text-[10px] font-extrabold rounded-md shadow-md">
+                  <span className="px-1.5 py-0.5 sm:px-2 bg-[#b6171e] text-white text-[9px] sm:text-[10px] font-extrabold rounded-md shadow-md">
                     #{String(idx + 1).padStart(2, '0')}
                   </span>
                 </div>
               </div>
 
               {/* Photo Info Content */}
-              <div className="p-5 flex-1 flex flex-col justify-between space-y-3 bg-gradient-to-b from-white to-[#fffcf7]">
-                <div className="space-y-1.5">
-                  <h3 className="font-serif font-bold text-base text-[#8f4e00] group-hover:text-[#b6171e] transition-colors leading-snug">
+              <div className="p-3 sm:p-5 flex-1 flex flex-col justify-between space-y-2 sm:space-y-3 bg-gradient-to-b from-white to-[#fffcf7]">
+                <div className="space-y-1 sm:space-y-1.5">
+                  <h3 className="font-serif font-bold text-xs sm:text-base text-[#8f4e00] group-hover:text-[#b6171e] transition-colors leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-[#554336] text-xs leading-relaxed line-clamp-2">
+                  <p className="text-[#554336] text-[10px] sm:text-xs leading-tight sm:leading-relaxed line-clamp-2">
                     {item.subtitle}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-[#dbc2b0]/20 flex items-center justify-between text-xs text-[#8f4e00] font-semibold">
-                  <span className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                <div className="pt-2 sm:pt-3 border-t border-[#dbc2b0]/20 flex items-center justify-between text-[10px] sm:text-xs text-[#8f4e00] font-semibold">
+                  <span className="flex items-center gap-0.5 sm:gap-1 group-hover:translate-x-1 transition-transform">
                     <span>विस्तार से देखें</span>
-                    <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                    <span className="material-symbols-outlined text-[10px] sm:text-xs">arrow_forward</span>
                   </span>
-                  <span className="text-[10px] text-[#887364]">सोम बाज़ार</span>
+                  <span className="text-[9px] sm:text-[10px] text-[#887364]">सोम बाज़ार</span>
                 </div>
               </div>
             </div>
