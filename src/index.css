@@ -99,22 +99,40 @@
   animation: none;
 }
 
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
 ::view-transition-old(root) {
-  animation: 220ms ease-out both fade-out;
+  animation: 450ms ease-out both page-fade-out;
+  mix-blend-mode: normal;
 }
 
 ::view-transition-new(root) {
-  animation: 260ms ease-in both fade-in;
+  animation: 500ms cubic-bezier(0.16, 1, 0.3, 1) both page-slide-up-in;
+  mix-blend-mode: normal;
 }
 
-@keyframes fade-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+@keyframes page-fade-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.98);
+  }
 }
 
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes page-slide-up-in {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
