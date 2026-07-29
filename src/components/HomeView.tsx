@@ -79,25 +79,47 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </div>
           </div>
 
-          {/* Hero Logo - Floating Motion Divine Emblem without Outer Box */}
+          {/* Hero Logo - Floating Motion Divine Emblem with Sun Corona Aura */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative flex flex-col items-center justify-center p-2 sm:p-4 group mt-2 md:mt-0"
           >
-            {/* Soft Sunbeams Glow */}
+            {/* Outer Fading Solar Aura (Massive Sun Glow extending outwards) */}
             <motion.div
               animate={{
-                scale: [1, 1.15, 1],
-                opacity: [0.3, 0.6, 0.3],
+                scale: [1, 1.28, 1],
+                opacity: [0.85, 0.45, 0.85],
               }}
               transition={{
                 repeat: Infinity,
-                duration: 4,
+                duration: 3.8,
                 ease: "easeInOut",
               }}
-              className="absolute w-48 h-48 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full bg-gradient-to-tr from-[#ff9933]/30 via-[#ffd700]/25 to-[#ff4500]/20 blur-3xl pointer-events-none"
+              className="absolute w-64 h-64 sm:w-96 sm:h-96 md:w-[460px] md:h-[460px] rounded-full pointer-events-none z-0"
+              style={{
+                background: 'radial-gradient(circle, rgba(255, 180, 0, 0.85) 0%, rgba(255, 120, 0, 0.5) 30%, rgba(255, 70, 0, 0.2) 60%, rgba(255, 50, 0, 0.05) 80%, transparent 100%)',
+                filter: 'blur(16px)',
+              }}
+            />
+
+            {/* Inner Intense Solar Flare Corona Ring */}
+            <motion.div
+              animate={{
+                scale: [1.05, 1.18, 1.05],
+                opacity: [0.9, 0.6, 0.9],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 2.8,
+                ease: "easeInOut",
+              }}
+              className="absolute w-44 h-44 sm:w-64 sm:h-64 md:w-76 md:h-76 rounded-full pointer-events-none z-0"
+              style={{
+                background: 'radial-gradient(circle, rgba(255, 215, 0, 0.9) 0%, rgba(255, 140, 0, 0.6) 45%, rgba(255, 90, 0, 0.2) 75%, transparent 100%)',
+                filter: 'blur(8px)',
+              }}
             />
 
             {/* Sacred Orbit Halo & Smooth Levitation Container */}
@@ -108,35 +130,38 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 duration: 4.5,
                 ease: "easeInOut",
               }}
-              className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-68 md:h-68 flex items-center justify-center cursor-pointer"
+              className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-68 md:h-68 flex items-center justify-center cursor-pointer z-10"
             >
-              {/* Golden Dashed Clockwise Orbit */}
+              {/* Sun Flare Radial Glow Ring */}
+              <div className="absolute inset-0 rounded-full border-2 border-[#ffd700]/90 shadow-[0_0_35px_rgba(255,215,0,0.8),0_0_65px_rgba(255,140,0,0.5)]"></div>
+
+              {/* Golden Dashed Clockwise Solar Ray Orbit */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{
                   repeat: Infinity,
-                  duration: 24,
+                  duration: 22,
                   ease: "linear",
                 }}
-                className="absolute inset-0 rounded-full border-2 border-dashed border-[#ffd700]/70"
+                className="absolute -inset-2 rounded-full border-2 border-dashed border-[#ffd700] shadow-[0_0_20px_rgba(255,215,0,0.7)]"
               />
 
-              {/* Dotted Counter-Clockwise Orbit */}
+              {/* Dotted Counter-Clockwise Sun Halo Orbit */}
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{
                   repeat: Infinity,
-                  duration: 16,
+                  duration: 15,
                   ease: "linear",
                 }}
-                className="absolute inset-2 rounded-full border border-dotted border-amber-100/60"
+                className="absolute -inset-5 rounded-full border-2 border-dotted border-[#ff9933]/80 shadow-[0_0_30px_rgba(255,153,51,0.5)]"
               />
 
-              {/* Central Circle holding Official Emblem */}
+              {/* Central Circle holding Official Sun Emblem */}
               <motion.div
                 whileHover={{ scale: 1.08 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="relative w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full bg-white/95 p-2.5 sm:p-3.5 shadow-[0_12px_35px_rgba(0,0,0,0.4)] border-2 border-amber-200 flex items-center justify-center overflow-hidden"
+                className="relative w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full bg-white/95 p-2.5 sm:p-3.5 shadow-[0_0_40px_rgba(255,215,0,0.8),0_12px_35px_rgba(0,0,0,0.4)] border-3 border-amber-300 flex items-center justify-center overflow-hidden z-20"
               >
                 {/* Subtle Light Reflection Sweep */}
                 <motion.div
