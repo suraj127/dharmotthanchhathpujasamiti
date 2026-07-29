@@ -104,12 +104,12 @@
 }
 
 ::view-transition-old(root) {
-  animation: 450ms ease-out both page-fade-out;
+  animation: 700ms cubic-bezier(0.4, 0, 0.2, 1) both page-fade-out;
   mix-blend-mode: normal;
 }
 
 ::view-transition-new(root) {
-  animation: 500ms cubic-bezier(0.16, 1, 0.3, 1) both page-slide-up-in;
+  animation: 850ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both page-slide-up-in;
   mix-blend-mode: normal;
 }
 
@@ -117,21 +117,25 @@
   0% {
     opacity: 1;
     transform: translateY(0) scale(1);
+    filter: blur(0px);
   }
   100% {
     opacity: 0;
-    transform: translateY(-20px) scale(0.98);
+    transform: translateY(-30px) scale(0.97);
+    filter: blur(4px);
   }
 }
 
 @keyframes page-slide-up-in {
   0% {
     opacity: 0;
-    transform: translateY(80px);
+    transform: translateY(120px);
+    filter: blur(4px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0px);
   }
 }
 
