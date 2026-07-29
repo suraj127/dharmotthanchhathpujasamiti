@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomeView } from './components/HomeView';
@@ -220,6 +221,9 @@ export default function App() {
         onClose={() => setIsPhotoUploadModalOpen(false)}
         onUploadSuccess={handleAddCommunityPhoto}
       />
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
