@@ -122,7 +122,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               }}
             />
 
-            {/* Sacred Orbit Halo & Smooth Levitation Container */}
+            {/* Sacred Sun Levitation Container */}
             <motion.div
               animate={{ y: [0, -7, 0] }}
               transition={{
@@ -130,38 +130,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 duration: 4.5,
                 ease: "easeInOut",
               }}
-              className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-68 md:h-68 flex items-center justify-center cursor-pointer z-10"
+              className="relative flex items-center justify-center cursor-pointer z-10"
             >
-              {/* Sun Flare Radial Glow Ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-[#ffd700]/90 shadow-[0_0_35px_rgba(255,215,0,0.8),0_0_65px_rgba(255,140,0,0.5)]"></div>
-
-              {/* Golden Dashed Clockwise Solar Ray Orbit */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 22,
-                  ease: "linear",
-                }}
-                className="absolute -inset-2 rounded-full border-2 border-dashed border-[#ffd700] shadow-[0_0_20px_rgba(255,215,0,0.7)]"
-              />
-
-              {/* Dotted Counter-Clockwise Sun Halo Orbit */}
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 15,
-                  ease: "linear",
-                }}
-                className="absolute -inset-5 rounded-full border-2 border-dotted border-[#ff9933]/80 shadow-[0_0_30px_rgba(255,153,51,0.5)]"
-              />
-
               {/* Central Circle holding Official Sun Emblem */}
               <motion.div
                 whileHover={{ scale: 1.08 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="relative w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full bg-white/95 p-2.5 sm:p-3.5 shadow-[0_0_40px_rgba(255,215,0,0.8),0_12px_35px_rgba(0,0,0,0.4)] border-3 border-amber-300 flex items-center justify-center overflow-hidden z-20"
+                className="relative w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full bg-white/95 p-2.5 sm:p-3.5 shadow-[0_0_50px_rgba(255,215,0,0.9),0_12px_35px_rgba(0,0,0,0.4)] border-3 border-amber-300 flex items-center justify-center overflow-hidden z-20"
               >
                 {/* Subtle Light Reflection Sweep */}
                 <motion.div
