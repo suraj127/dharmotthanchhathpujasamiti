@@ -20,49 +20,49 @@ export const HomeView: React.FC<HomeViewProps> = ({
   return (
     <div className="space-y-16 animate-in fade-in duration-300">
       {/* 1. Hero Section */}
-      <section className="relative min-h-[85vh] md:min-h-[90vh] flex items-center overflow-hidden rounded-3xl md:rounded-[40px] shadow-2xl mx-3 md:mx-10 mt-3 border border-[#dbc2b0]/30">
+      <section className="relative min-h-0 md:min-h-[90vh] flex items-center overflow-hidden rounded-3xl md:rounded-[40px] shadow-2xl mx-3 md:mx-10 mt-3 border border-[#dbc2b0]/30">
         <div className="absolute inset-0 z-0">
           <img
             alt="छठ पूजा सूर्योदय का दृश्य"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-[70%_center] md:object-center"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwsWpWMLFJeL5aW_wc7yfEwwP2sL82WdKguD2snWKTNeTc6cqelGvsl9dl-W1IAJ-tJoBqQ9gQx-9vridp06ScSuuwksBwLvYXLjNf23PtQWZ3nJxo0xOkUEBKeG26bJZVGZoVe_gSITrmZjEg7cNCpX3pEkHYEoanicwYjdm6ko9TgWw5YQrLNYyoeiiklO6zwmSn-AIL32z8MXEFLuHbC9DsQYU7zKXmaWahGOnO9tbjh7JqO7kVvV3AC2X8LbkuSdiq5thlI1w=s1600"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#2e1500]/80 via-[#2e1500]/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#2e1500]/90 via-[#2e1500]/65 to-[#2e1500]/85 md:bg-gradient-to-r md:from-[#2e1500]/80 md:via-[#2e1500]/40 md:to-transparent"></div>
         </div>
 
-        <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-16 py-16 flex flex-col md:flex-row items-center justify-between gap-10">
-          <div className="max-w-2xl space-y-6">
-            <div className="inline-flex items-center gap-2.5 bg-[#ff9933]/30 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#ff9933]/50 text-amber-100">
-              <img src={OFFICIAL_LOGO_URL} alt="Logo" className="w-6 h-6 object-contain mix-blend-multiply" />
-              <span className="text-xs font-semibold tracking-widest uppercase">धर्मोत्थान छठ पूजा समिति</span>
+        <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-6 md:px-16 py-10 sm:py-12 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-10">
+          <div className="max-w-2xl space-y-4 sm:space-y-6 text-center md:text-left">
+            <div className="inline-flex items-center gap-2.5 bg-[#ff9933]/30 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#ff9933]/50 text-amber-100 mx-auto md:mx-0">
+              <img src={OFFICIAL_LOGO_URL} alt="Logo" className="w-5 h-5 sm:w-6 sm:h-6 object-contain mix-blend-multiply" />
+              <span className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase">धर्मोत्थान छठ पूजा समिति</span>
             </div>
 
-            <h1 className="text-white font-serif text-4xl md:text-6xl font-bold leading-tight drop-shadow-md">
+            <h1 className="text-white font-serif text-3xl sm:text-4xl md:text-6xl font-bold leading-tight drop-shadow-md">
               आस्था और एकजुटता का संगम: <br />
               <span className="text-[#e9c400]">छठ पूजा 2026</span>
             </h1>
 
-            <p className="text-white/90 text-base md:text-lg leading-relaxed max-w-xl">
+            <p className="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mx-auto md:mx-0">
               सूर्य देव और छठी मैया के पावण पर्व पर धर्मोत्थान छठ पूजा समिति के साथ जुड़ें। ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क के हृदय में पवित्रता, भक्ति और सामुदायिक सेवा की एक आध्यात्मिक यात्रा।
             </p>
 
-            <div className="flex flex-wrap gap-3 pt-4">
+            <div className="flex flex-wrap gap-2.5 sm:gap-3 justify-center md:justify-start pt-2 sm:pt-4">
               <button
                 onClick={() => {
                   setCurrentTab('chhath2026');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="px-6 py-3.5 saffron-gradient text-white rounded-xl font-semibold text-sm shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
+                className="px-5 sm:px-6 py-3 sm:py-3.5 saffron-gradient text-white rounded-xl font-semibold text-xs sm:text-sm shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
               >
                 <span>कार्यक्रम विवरण</span>
-                <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                <span className="material-symbols-outlined text-base sm:text-lg">arrow_forward</span>
               </button>
 
               <button
                 onClick={onOpenDonateModal}
-                className="px-6 py-3.5 bg-amber-100 text-[#8f4e00] hover:bg-white rounded-xl font-bold text-sm shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
+                className="px-5 sm:px-6 py-3 sm:py-3.5 bg-amber-100 text-[#8f4e00] hover:bg-white rounded-xl font-bold text-xs sm:text-sm shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
               >
-                <span className="material-symbols-outlined text-lg text-[#b6171e]">volunteer_activism</span>
+                <span className="material-symbols-outlined text-base sm:text-lg text-[#b6171e]">volunteer_activism</span>
                 <span>दान करें (सहयोग राशि)</span>
               </button>
 
@@ -71,7 +71,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   setCurrentTab('about');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="px-5 py-3.5 border border-white/50 text-white hover:bg-white/20 rounded-xl font-semibold text-sm backdrop-blur-sm transition-all cursor-pointer"
+                className="px-4 sm:px-5 py-3 sm:py-3.5 border border-white/50 text-white hover:bg-white/20 rounded-xl font-semibold text-xs sm:text-sm backdrop-blur-sm transition-all cursor-pointer"
               >
                 हमारा इतिहास
               </button>
@@ -83,7 +83,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             initial={{ opacity: 0, scale: 0.95, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative flex flex-col items-center justify-center p-2 sm:p-4 group"
+            className="relative flex flex-col items-center justify-center p-2 sm:p-4 group mt-2 md:mt-0"
           >
             {/* Soft Sunbeams Glow */}
             <motion.div
@@ -96,7 +96,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 duration: 4,
                 ease: "easeInOut",
               }}
-              className="absolute w-72 h-72 md:w-80 md:h-80 rounded-full bg-gradient-to-tr from-[#ff9933]/30 via-[#ffd700]/25 to-[#ff4500]/20 blur-3xl pointer-events-none"
+              className="absolute w-48 h-48 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full bg-gradient-to-tr from-[#ff9933]/30 via-[#ffd700]/25 to-[#ff4500]/20 blur-3xl pointer-events-none"
             />
 
             {/* Sacred Orbit Halo & Smooth Levitation Container */}
@@ -107,7 +107,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 duration: 4.5,
                 ease: "easeInOut",
               }}
-              className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-68 md:h-68 flex items-center justify-center cursor-pointer"
+              className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-68 md:h-68 flex items-center justify-center cursor-pointer"
             >
               {/* Golden Dashed Clockwise Orbit */}
               <motion.div
@@ -128,14 +128,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   duration: 16,
                   ease: "linear",
                 }}
-                className="absolute inset-2.5 rounded-full border border-dotted border-amber-100/60"
+                className="absolute inset-2 rounded-full border border-dotted border-amber-100/60"
               />
 
               {/* Central Circle holding Official Emblem */}
               <motion.div
                 whileHover={{ scale: 1.08 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-full bg-white/95 p-3.5 shadow-[0_12px_35px_rgba(0,0,0,0.4)] border-2 border-amber-200 flex items-center justify-center overflow-hidden"
+                className="relative w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full bg-white/95 p-2.5 sm:p-3.5 shadow-[0_12px_35px_rgba(0,0,0,0.4)] border-2 border-amber-200 flex items-center justify-center overflow-hidden"
               >
                 {/* Subtle Light Reflection Sweep */}
                 <motion.div
