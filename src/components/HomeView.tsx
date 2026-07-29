@@ -219,65 +219,139 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
-      {/* 3. Upcoming Event Card Section */}
+      {/* 3. Executive Committee Section (कार्यकारिणी समिति) */}
       <section className="py-6 max-w-[1280px] mx-auto px-6 md:px-12">
-        <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-[#dbc2b0]/30 flex flex-col md:flex-row">
-          <div className="md:w-1/2 relative h-64 md:h-auto">
-            <img
-              alt="सजा हुआ घाट"
-              className="w-full h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXslVGB0mhG38f21dq6SVo6Z5ueCCa_KrMaB5ZcItmr6Nyie5kIih1ShjRXMw-PVLmJgEQPlgykSfFRl-aZMd7uIB6Z37jsMjcz1Q-2Q1rom76m26iHep645MdlothVsG3FRaTBcIDf2kyGVv6jjDO8jB2cg3UagFP0RgW619vea4RJuWnmpoBRXuPT-6_DFR_AG04pPWEUiPV3q-foIgOS5VGRTTgJ-rsIaa_wLGdTb002-reo2raRS7uebpazmcy3gh66oyUupI=s1600"
-            />
-            <div className="absolute top-5 left-5 bg-[#b6171e] text-white px-4 py-1.5 rounded-lg text-xs font-semibold shadow-lg">
-              आगामी: नवंबर 2026
+        <div className="bg-white rounded-3xl p-6 md:p-10 shadow-xl border border-[#dbc2b0]/30 space-y-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#dbc2b0]/30 pb-6">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#ffdcc2] text-[#8f4e00] text-xs font-semibold uppercase tracking-wider mb-2">
+                <span className="material-symbols-outlined text-sm">groups</span>
+                <span>धर्मोत्थान छठ पूजा समिति</span>
+              </div>
+              <h2 className="font-serif text-2xl md:text-4xl font-bold text-[#8f4e00]">
+                कार्यकारिणी समिति (Executive Committee)
+              </h2>
+              <p className="text-[#554336] text-xs md:text-sm mt-1">
+                ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क (दिल्ली) — हमारे समर्पित पदाधिकारी एवं कार्यकारिणी सदस्य
+              </p>
             </div>
+            <button
+              onClick={() => {
+                setCurrentTab('about');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="px-5 py-2.5 bg-[#ff9933]/15 text-[#8f4e00] hover:bg-[#ff9933]/25 border border-[#ff9933]/30 rounded-xl font-semibold text-xs transition-all flex items-center gap-1.5 self-start md:self-auto cursor-pointer shadow-sm hover:scale-105"
+            >
+              <span>समिति के बारे में विस्तार से देखें</span>
+              <span className="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
           </div>
 
-          <div className="md:w-1/2 p-8 md:p-10 space-y-6">
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#1a1c1e]">
-              छठ पूजा उत्सव 2026: ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क
-            </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                name: 'श्री अरविंद कुमार',
+                nameEn: 'Arvind Kumar',
+                role: 'अध्यक्ष (President)',
+                image: '/members/arvind-kumar.jpeg',
+                badgeBg: 'bg-[#b6171e] text-white',
+                desc: 'समिति के अध्यक्ष जो सभी गतिविधियों और सामाजिक-धार्मिक परियोजनाओं का मार्गदर्शन व नेतृत्व करते हैं।',
+              },
+              {
+                name: 'श्री सूरज भान गुप्ता',
+                nameEn: 'Suraj Bhan Gupta',
+                role: 'उपाध्यक्ष (Vice President)',
+                image: '/members/suraj-bhan-gupta.jpeg',
+                badgeBg: 'bg-[#ff9933] text-white',
+                desc: 'समिति के सह-मार्गदर्शक जो सभी कार्यक्रमों, घाट व्यवस्था और प्रशासनिक कार्यों का समन्वय करते हैं।',
+              },
+              {
+                name: 'श्री राज सिंह',
+                nameEn: 'Raj Singh',
+                role: 'महासचिव (General Secretary)',
+                image: '/members/raj-singh.jpeg',
+                badgeBg: 'bg-[#8f4e00] text-white',
+                desc: 'समिति के मुख्य संचालक जो सभी कार्यक्रमों, पत्राचार और संगठनात्मक गतिविधियों का प्रबंधन करते हैं।',
+              },
+              {
+                name: 'श्री मुरारी झा',
+                nameEn: 'Murari Jha',
+                role: 'कोषाध्यक्ष (Treasurer)',
+                image: '/members/murari-jha.jpeg',
+                badgeBg: 'bg-[#705d00] text-white',
+                desc: 'वित्तीय पारदर्शिता और समिति के कोष का लेखा-जोखा रखने के जिम्मेदार अधिकारी।',
+              },
+              {
+                name: 'श्री रजनीश राय',
+                nameEn: 'Rajnish Rai',
+                role: 'संरक्षक (Patron)',
+                image: '/members/rajnish-rai.jpeg',
+                badgeBg: 'bg-[#554336] text-white',
+                desc: 'समिति के मुख्य संरक्षक और वरिष्ठ मार्गदर्शक जो सभी कल्याणकारी निर्णयों में दिशा-निर्देश प्रदान करते हैं।',
+              },
+              {
+                name: 'आचार्य आदित्य झा',
+                nameEn: 'Acharya Aditya Jha',
+                role: 'सलाहकार (Advisor)',
+                image: '/members/acharya-aditya-jha.jpeg',
+                badgeBg: 'bg-[#b6171e] text-white',
+                desc: 'धार्मिक अनुष्ठानों, पावन छठ पूजा विधि-विधान और सांस्कृतिक कार्यक्रमों के मुख्य सलाहकार।',
+              },
+              {
+                name: 'श्री सोनू कुमार',
+                nameEn: 'Sonu Kumar',
+                role: 'कार्यकारिणी सदस्य',
+                image: '/members/sonu-kumar.jpeg',
+                badgeBg: 'bg-[#ff9933] text-white',
+                desc: 'घाट व्यवस्था, महाप्रसाद वितरण और स्वयंसेवक प्रबंधन के सक्रिय प्रभारी सदस्य।',
+              },
+              {
+                name: 'श्री रजनीश मिश्रा',
+                nameEn: 'Rajnish Mishra',
+                role: 'कार्यकारिणी सदस्य',
+                image: '/members/rajnish-mishra.jpeg',
+                badgeBg: 'bg-[#ff9933] text-white',
+                desc: 'घाट व्यवस्था, महाप्रसाद वितरण और स्वयंसेवक प्रबंधन के सक्रिय प्रभारी सदस्य।',
+              },
+            ].map((member, index) => (
+              <div
+                key={index}
+                className="group bg-[#f9f8f6] hover:bg-white rounded-2xl p-5 border border-[#dbc2b0]/30 hover:border-[#ff9933]/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center space-y-3 relative overflow-hidden"
+              >
+                {/* Decorative Top Accent Bar */}
+                <div className="absolute top-0 left-0 right-0 h-1.5 saffron-gradient opacity-80 group-hover:opacity-100 transition-opacity"></div>
 
-            <div className="flex items-start gap-4">
-              <span className="material-symbols-outlined text-[#8f4e00] bg-[#ffdcc2] p-2.5 rounded-xl text-xl flex-shrink-0">
-                location_on
-              </span>
-              <div>
-                <h4 className="font-semibold text-sm text-[#1a1c1e]">मुख्य स्थान</h4>
-                <p className="text-[#554336] text-xs md:text-sm mt-0.5">
-                  ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क, दिल्ली – 110059
-                </p>
-              </div>
-            </div>
+                {/* Member Photo */}
+                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-[#ff9933]/30 shadow-md group-hover:scale-105 group-hover:border-[#ff9933] transition-all duration-300">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
 
-            <div className="flex items-start gap-4">
-              <span className="material-symbols-outlined text-[#8f4e00] bg-[#ffdcc2] p-2.5 rounded-xl text-xl flex-shrink-0">
-                event
-              </span>
-              <div>
-                <h4 className="font-semibold text-sm text-[#1a1c1e]">कार्यक्रम अनुसूची</h4>
-                <p className="text-[#554336] text-xs md:text-sm mt-0.5">
-                  4-दिवसीय भव्य महोत्सव। वैदिक मंत्रोच्चार के साथ 2026 के उत्सव का उद्घाटन समारोह।
-                </p>
-              </div>
-            </div>
+                {/* Member Details */}
+                <div className="space-y-1.5 flex-1 flex flex-col justify-between w-full">
+                  <div>
+                    <h3 className="font-serif font-bold text-base text-[#1a1c1e] group-hover:text-[#8f4e00] transition-colors leading-snug">
+                      {member.name}
+                    </h3>
+                    <p className="text-[11px] text-[#887364] font-medium mt-0.5">({member.nameEn})</p>
+                  </div>
 
-            <div className="pt-3 border-t border-[#dbc2b0]/30 space-y-2">
-              <div className="flex justify-between text-xs font-semibold">
-                <span className="text-[#1a1c1e]">तैयारी की प्रगति</span>
-                <span className="text-[#8f4e00]">65%</span>
-              </div>
-              <div className="w-full h-3 bg-[#e2e2e5] rounded-full overflow-hidden">
-                <div className="h-full saffron-gradient w-[65%] rounded-full"></div>
-              </div>
-            </div>
+                  <div className="pt-1">
+                    <span className={`inline-block px-3 py-0.5 rounded-full text-[11px] font-semibold shadow-sm ${member.badgeBg}`}>
+                      {member.role}
+                    </span>
+                  </div>
 
-            <button
-              onClick={onOpenEventGuideModal}
-              className="w-full md:w-auto px-7 py-3 bg-[#b6171e] text-white rounded-xl font-semibold text-xs md:text-sm hover:bg-[#b6171e]/90 transition-all cursor-pointer shadow-md"
-            >
-              ईवेंट गाइड देखें
-            </button>
+                  <p className="text-xs text-[#554336] leading-relaxed pt-2 border-t border-[#dbc2b0]/20 mt-2">
+                    {member.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
