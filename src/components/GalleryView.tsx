@@ -183,7 +183,7 @@ export const GalleryView: React.FC<GalleryViewProps> = () => {
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzHr0OnoYCm7RHe-7OfssrYjZQoSpr_4-UXb6OOLY1wk6QZDdUnfChA8-P-4UppLzjUpHYSRFD0Bimns5c6KucBT0tcAF5UUMlbx9dLIza_dS7Ac7ZjPHg_L5cstBT1pPOpA22uKeXzkWQzu4YglGPoAKlwX1KN_HmVyqf9Q9DXrjkkcU-KttWGPwAsAdlhpVC5SoCeDSE2eZnR7lTo08cOBNPVzOokSDGBIG2k-GUgtCt2UDrhcsNeIwVmZy2uCJzSU_ywHaEHjE=s1600"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#2e1500]/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-[#f9f9fc]"></div>
         </div>
 
         <div className="relative z-10 px-6 max-w-3xl space-y-4 py-12">
