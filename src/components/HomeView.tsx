@@ -31,7 +31,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#f9f9fc]"></div>
         </div>
 
-        <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-6 md:px-16 py-10 sm:py-12 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-10">
+        <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-6 md:px-16 py-8 sm:py-12 md:py-16 flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-10">
           <div className="max-w-2xl space-y-4 sm:space-y-6 text-center md:text-left">
             <div className="inline-flex items-center gap-2.5 bg-[#ff9933]/30 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#ff9933]/50 text-amber-100 mx-auto md:mx-0">
               <img src={OFFICIAL_LOGO_URL} alt="Logo" className="w-5 h-5 sm:w-6 sm:h-6 object-contain mix-blend-multiply" />
