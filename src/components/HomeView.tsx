@@ -257,7 +257,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <span className="text-[10px] text-[#887364] font-bold">◄ स्वाइप करें ►</span>
           </div>
 
-          <div className="flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-4 pt-1 sm:space-x-0 sm:pb-0 sm:pt-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 styled-scrollbar scroll-smooth">
+          <div className="flex overflow-x-auto snap-x snap-mandatory space-x-3 sm:space-x-0 pb-4 pt-1 sm:pb-0 sm:pt-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 styled-scrollbar scroll-smooth">
             {[
               {
                 name: 'श्री अरविंद कुमार',
@@ -326,13 +326,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
             ].map((member, index) => (
               <div
                 key={index}
-                className="w-[80vw] max-w-[280px] sm:w-full flex-shrink-0 snap-center group bg-[#f9f8f6] hover:bg-white rounded-2xl p-5 border border-[#dbc2b0]/30 hover:border-[#ff9933]/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center space-y-3 relative overflow-hidden"
+                className="w-[44vw] min-w-[155px] max-w-[210px] sm:w-full flex-shrink-0 snap-start group bg-[#f9f8f6] hover:bg-white rounded-2xl p-3 sm:p-5 border border-[#dbc2b0]/30 hover:border-[#ff9933]/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center space-y-2 sm:space-y-3 relative overflow-hidden"
               >
                 {/* Decorative Top Accent Bar */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 saffron-gradient opacity-80 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute top-0 left-0 right-0 h-1 sm:h-1.5 saffron-gradient opacity-80 group-hover:opacity-100 transition-opacity"></div>
 
                 {/* Member Photo */}
-                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-[#ff9933]/30 shadow-md group-hover:scale-105 group-hover:border-[#ff9933] transition-all duration-300">
+                <div className="relative w-20 h-20 sm:w-32 sm:h-32 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#ff9933]/30 shadow-md group-hover:scale-105 group-hover:border-[#ff9933] transition-all duration-300">
                   <img
                     src={member.image}
                     alt={member.name}
@@ -342,21 +342,21 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 </div>
 
                 {/* Member Details */}
-                <div className="space-y-1.5 flex-1 flex flex-col justify-between w-full">
+                <div className="space-y-1 sm:space-y-1.5 flex-1 flex flex-col justify-between w-full">
                   <div>
-                    <h3 className="font-serif font-bold text-base text-[#1a1c1e] group-hover:text-[#8f4e00] transition-colors leading-snug">
+                    <h3 className="font-serif font-bold text-xs sm:text-base text-[#1a1c1e] group-hover:text-[#8f4e00] transition-colors leading-snug">
                       {member.name}
                     </h3>
-                    <p className="text-[11px] text-[#887364] font-medium mt-0.5">({member.nameEn})</p>
+                    <p className="text-[10px] sm:text-[11px] text-[#887364] font-medium mt-0.5 truncate">({member.nameEn})</p>
                   </div>
 
-                  <div className="pt-1">
-                    <span className={`inline-block px-3 py-0.5 rounded-full text-[11px] font-semibold shadow-sm ${member.badgeBg}`}>
+                  <div className="pt-0.5 sm:pt-1">
+                    <span className={`inline-block px-2 py-0.5 sm:px-3 rounded-full text-[10px] sm:text-[11px] font-semibold shadow-sm leading-tight ${member.badgeBg}`}>
                       {member.role}
                     </span>
                   </div>
 
-                  <p className="text-xs text-[#554336] leading-relaxed pt-2 border-t border-[#dbc2b0]/20 mt-2">
+                  <p className="text-[10px] sm:text-xs text-[#554336] leading-tight sm:leading-relaxed pt-1.5 sm:pt-2 border-t border-[#dbc2b0]/20 mt-1 sm:mt-2 line-clamp-3 sm:line-clamp-none">
                     {member.desc}
                   </p>
                 </div>
