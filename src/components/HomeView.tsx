@@ -248,7 +248,16 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Horizontal Scroll Hint for Mobile */}
+          <div className="flex sm:hidden items-center justify-between text-xs text-[#8f4e00] font-semibold bg-[#ff9933]/10 px-4 py-2 rounded-xl border border-[#ff9933]/20">
+            <span className="flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-sm text-[#ff9933] animate-pulse">swipe_left</span>
+              <span>सदस्यों को देखने के लिए बाएं-दाएं स्वाइप करें</span>
+            </span>
+            <span className="text-[10px] text-[#887364] font-bold">◄ स्वाइप करें ►</span>
+          </div>
+
+          <div className="flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-4 pt-1 sm:space-x-0 sm:pb-0 sm:pt-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 styled-scrollbar scroll-smooth">
             {[
               {
                 name: 'श्री अरविंद कुमार',
@@ -317,7 +326,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             ].map((member, index) => (
               <div
                 key={index}
-                className="group bg-[#f9f8f6] hover:bg-white rounded-2xl p-5 border border-[#dbc2b0]/30 hover:border-[#ff9933]/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center space-y-3 relative overflow-hidden"
+                className="w-[80vw] max-w-[280px] sm:w-full flex-shrink-0 snap-center group bg-[#f9f8f6] hover:bg-white rounded-2xl p-5 border border-[#dbc2b0]/30 hover:border-[#ff9933]/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center space-y-3 relative overflow-hidden"
               >
                 {/* Decorative Top Accent Bar */}
                 <div className="absolute top-0 left-0 right-0 h-1.5 saffron-gradient opacity-80 group-hover:opacity-100 transition-opacity"></div>
