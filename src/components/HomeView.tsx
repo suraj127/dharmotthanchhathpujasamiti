@@ -27,7 +27,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
             className="w-full h-full object-cover object-[70%_center] md:object-center"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwsWpWMLFJeL5aW_wc7yfEwwP2sL82WdKguD2snWKTNeTc6cqelGvsl9dl-W1IAJ-tJoBqQ9gQx-9vridp06ScSuuwksBwLvYXLjNf23PtQWZ3nJxo0xOkUEBKeG26bJZVGZoVe_gSITrmZjEg7cNCpX3pEkHYEoanicwYjdm6ko9TgWw5YQrLNYyoeiiklO6zwmSn-AIL32z8MXEFLuHbC9DsQYU7zKXmaWahGOnO9tbjh7JqO7kVvV3AC2X8LbkuSdiq5thlI1w=s1600"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#2e1500]/90 via-[#2e1500]/65 to-[#2e1500]/85 md:bg-gradient-to-r md:from-[#2e1500]/80 md:via-[#2e1500]/40 md:to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2e1500]/90 via-[#2e1500]/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#f9f9fc]"></div>
         </div>
 
         <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-6 md:px-16 py-10 sm:py-12 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-10">
