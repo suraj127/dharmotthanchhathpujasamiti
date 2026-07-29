@@ -35,7 +35,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
             <img 
               src={OFFICIAL_LOGO_URL} 
               alt="धर्मोत्थान छठ पूजा समिति लोगो" 
-              style={{ viewTransitionName: 'divine-logo' }}
               className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform"
             />
           </div>

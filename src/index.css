@@ -90,13 +90,14 @@
 
 /* View Transitions Styles */
 ::view-transition-group(site-navbar) {
-  animation: none;
+  animation: none !important;
   z-index: 100;
 }
 
 ::view-transition-old(site-navbar),
 ::view-transition-new(site-navbar) {
-  animation: none;
+  animation: none !important;
+  mix-blend-mode: normal !important;
 }
 
 ::view-transition-image-pair(root) {
