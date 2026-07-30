@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { OFFICIAL_LOGO_URL, CONTACT_PHONE, CONTACT_EMAIL } from '../constants';
+import { OFFICIAL_LOGO_URL, CONTACT_PHONE, CONTACT_PHONE_2, CONTACT_EMAIL } from '../constants';
 import { submitFormAndSendEmail } from '../lib/emailService';
 
 interface FooterProps {
@@ -94,6 +94,12 @@ export const Footer: React.FC<FooterProps> = ({
                 <a href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`} className="flex items-center gap-1.5 text-xs text-[#554336] hover:text-[#b6171e] transition-colors">
                   <span className="material-symbols-outlined text-base text-[#8f4e00]">call</span>
                   <span className="font-medium">{CONTACT_PHONE}</span>
+                </a>
+              </li>
+              <li>
+                <a href={`tel:${CONTACT_PHONE_2.replace(/\s+/g, '')}`} className="flex items-center gap-1.5 text-xs text-[#554336] hover:text-[#b6171e] transition-colors">
+                  <span className="material-symbols-outlined text-base text-[#8f4e00]">call</span>
+                  <span className="font-medium">{CONTACT_PHONE_2}</span>
                 </a>
               </li>
               <li>

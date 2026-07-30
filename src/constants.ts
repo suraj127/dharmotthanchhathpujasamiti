@@ -1,3 +1,5 @@
 export const OFFICIAL_LOGO_URL = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBkNiOkY6z-03qr78aZSLgwplM1UlCmJcMzI3e1XBp7eoz37Qn2cimAKLajiXrWPv5BjFypcxKpt7jN7EfQEaJjzsCo73Itn5hFv28JAdd45EYh8yLV1b6oc5FdOQ6f0_VRz4F2eP_r9KFI_tKdK9SDbYb7jdjGpmz6lbgUQRht-c2-yqcMYemx2duXPH09HbkD8QBdys-vSGl3cqV1Dw5RU7nxjkXKEdALAbYn1krfHuD98-B6cZCgxZhC_z1xRo-U7iDm7PUjdzE=s1200';
 export const CONTACT_PHONE = '+91 8383809579';
+export const CONTACT_PHONE_2 = '+91 9871830438';
 export const CONTACT_EMAIL = 'dharmotthanchaathpujasamiti@gmail.com';
+

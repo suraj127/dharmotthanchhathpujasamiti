@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { OFFICIAL_LOGO_URL, CONTACT_PHONE, CONTACT_EMAIL } from '../constants';
+import { OFFICIAL_LOGO_URL, CONTACT_PHONE, CONTACT_PHONE_2, CONTACT_EMAIL } from '../constants';
 import { submitFormAndSendEmail } from '../lib/emailService';
 
 interface ModalProps {
@@ -180,15 +180,23 @@ export const ContactModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             धर्मोत्थान छठ पूजा समिति (ई-ब्लॉक, सोम बाज़ार, नन्हे पार्क)
           </p>
 
-          <div className="mt-4 p-3.5 bg-[#f8f5f0] border border-[#dbc2b0]/50 rounded-2xl flex flex-col sm:flex-row items-center justify-around gap-2 text-xs">
-            <a href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`} className="flex items-center gap-1.5 text-[#8f4e00] font-bold hover:text-[#b6171e] transition-colors">
-              <span className="material-symbols-outlined text-base">call</span>
-              <span>{CONTACT_PHONE}</span>
-            </a>
-            <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-1.5 text-[#8f4e00] font-bold hover:text-[#b6171e] transition-colors break-all">
-              <span className="material-symbols-outlined text-base">mail</span>
-              <span>{CONTACT_EMAIL}</span>
-            </a>
+          <div className="mt-4 p-3.5 bg-[#f8f5f0] border border-[#dbc2b0]/50 rounded-2xl flex flex-col gap-2 text-xs">
+            <div className="flex flex-wrap items-center justify-around gap-2">
+              <a href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`} className="flex items-center gap-1.5 text-[#8f4e00] font-bold hover:text-[#b6171e] transition-colors">
+                <span className="material-symbols-outlined text-base">call</span>
+                <span>{CONTACT_PHONE}</span>
+              </a>
+              <a href={`tel:${CONTACT_PHONE_2.replace(/\s+/g, '')}`} className="flex items-center gap-1.5 text-[#8f4e00] font-bold hover:text-[#b6171e] transition-colors">
+                <span className="material-symbols-outlined text-base">call</span>
+                <span>{CONTACT_PHONE_2}</span>
+              </a>
+            </div>
+            <div className="text-center pt-1 border-t border-[#dbc2b0]/30">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="inline-flex items-center gap-1.5 text-[#8f4e00] font-bold hover:text-[#b6171e] transition-colors break-all">
+                <span className="material-symbols-outlined text-base">mail</span>
+                <span>{CONTACT_EMAIL}</span>
+              </a>
+            </div>
           </div>
         </div>
 
